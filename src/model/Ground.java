@@ -23,7 +23,6 @@ public class Ground extends Observable {
         plants = new boolean[rows][cols];
         this.rows = rows;
         this.cols = cols;
-        //initGame();
     }
 
     public boolean[][] getPlants() {
@@ -69,11 +68,21 @@ public class Ground extends Observable {
         thread.start();
     }
 
+    /**
+     * Choisi un booléen aléatoire pour chaque case du tableau 2d de la classe
+     */
     public void initPlants() {
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
                 this.plants[row][col] = new Random().nextBoolean();
             }
         }
+    }
+
+    public void modifiePixel(int i, int j)
+    {
+        this.plants[i][j]=!this.plants[i][j];
+        setChanged();
+        notifyObservers(this.plants);
     }
 }

@@ -1,15 +1,19 @@
-import model.Case;
-import model.Ground2;
+import model.Ground;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Observable;
+import java.util.Observer;
 
-public class View extends JFrame {
-    private final Ground2 model;
+public class View extends JFrame implements Observer {
+    private final Ground ground;
+    private final JPanel[][] cases = new JPanel[10][10];
 
-    public View(Ground2 model) {
+    public View(Ground model) {
         super();
-        this.model = model;
+        this.ground = model;
         initialize();
     }
 
@@ -19,25 +23,34 @@ public class View extends JFrame {
         setTitle("HarvestMoon2");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        for (int i = 0; i < 100; i++) {
-            Case caseModel = this.model.getCase(i / this.model.getRows(), i % this.model.getCols());
-            CaseJpanel caseJpanel = new CaseJpanel(caseModel);
-            caseModel.addObserver(caseJpanel);
-            caseModel.NotiAll();
-
-            this.add(caseJpanel); // add à la grid
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                final int k = i;
+                final int l = j;
+                cases[i][j] = new JPanel();
+                cases[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, false));
+                cases[i][j].setBackground(this.ground.getPlants()[i][j] ? Color.RED : Color.WHITE);
+                cases[i][j].addMouseListener(new MouseAdapter() {
+                    public void mouseClicked(MouseEvent e) {
+                        System.out.println("clic");
+                        ground.modifiePixel(k, l);
+                    }
+                });
+                this.add(cases[i][j]); // add à la grid
+            }
         }
 
         setVisible(true);
     }
 
-//    @Override
-//    public void update(Observable o, Object arg) {
-//        boolean[][] plants = (boolean[][]) (arg);
-//        System.out.println("receive plants");
-//        for (int i = 0; i < 100; i++) {
-//            this.cases.get(i).newPaint(plants[i / this.model.getRows()][i % this.model.getCols()]);
-//            this.cases.get(i).setSelected(plants[i / this.model.getRows()][i % this.model.getCols()]);
-//        }
-//    }
+    @Override
+    public void update(Observable o, Object arg) {
+        boolean[][] plants = (boolean[][]) (arg);
+        System.out.println("receive plants");
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                cases[i][j].setBackground(this.ground.getPlants()[i][j] ? Color.RED : Color.WHITE);
+            }
+        }
+    }
 }

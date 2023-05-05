@@ -1,5 +1,3 @@
-import model.Case;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -8,21 +6,18 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class CaseJpanel extends JPanel implements Observer {
-    private final Case caseModel;
     private boolean selected;
 
-    public CaseJpanel(Case caseModel) {
+    public CaseJpanel() {
         super();
         selected = false;
-        this.caseModel = caseModel;
 
         this.setBackground(Color.WHITE);
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));
 
         this.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                System.out.println("clic");
-                caseModel.changePlanted();
+
             }
         });
     }
