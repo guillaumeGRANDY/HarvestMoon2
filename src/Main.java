@@ -1,13 +1,13 @@
-import model.Ground;
-import model.Ground2;
+import model.JardinModel;
+import vue.JardinVue;
 
 import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            Ground2 model = new Ground2(10, 10);
-            View vue = new View(model);
+            JardinModel model = new JardinModel(10, 10);
+            JardinVue vue = new JardinVue(model);
             model.initGame();
         });
     }

@@ -3,8 +3,8 @@ package model;
 import java.util.Observable;
 import java.util.Random;
 
-public class Ground2 extends Observable {
-    private final Case[][] plants;
+public class JardinModel extends Observable {
+    private final CaseModel[][] plants;
     private final int rows;
 
     public int getRows() {
@@ -19,8 +19,8 @@ public class Ground2 extends Observable {
 
     private final int timesUntilUpdate = 1000;
 
-    public Ground2(int rows, int cols) {
-        plants = new Case[rows][cols];
+    public JardinModel(int rows, int cols) {
+        plants = new CaseModel[rows][cols];
         this.rows = rows;
         this.cols = cols;
         changePlants();
@@ -32,11 +32,11 @@ public class Ground2 extends Observable {
         notifyObservers(this.plants);
     }
 
-    public Case[][] getPlants() {
+    public CaseModel[][] getPlants() {
         return plants;
     }
 
-    public Case getCase(int row, int col) {
+    public CaseModel getCase(int row, int col) {
         return this.plants[row][col];
     }
 
@@ -47,7 +47,7 @@ public class Ground2 extends Observable {
      * @param numRow numéro de ligne
      * @param numCol numéro de colonne
      */
-    public void setPlant(Case value, int numRow, int numCol) {
+    public void setPlant(CaseModel value, int numRow, int numCol) {
         this.plants[numRow][numCol] = value;
     }
 
@@ -76,7 +76,7 @@ public class Ground2 extends Observable {
     public void initPlants() {
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                this.plants[row][col] = new Case(new Random().nextBoolean());
+                this.plants[row][col] = new CaseModel(new Random().nextBoolean());
             }
         }
     }

@@ -2,7 +2,7 @@ package model;
 
 import java.util.Observable;
 
-public class Case extends Observable {
+public class CaseModel extends Observable {
     private boolean isPlanted = false;
 
     public boolean isPlanted() {
@@ -15,7 +15,7 @@ public class Case extends Observable {
         this.notifyObservers(this.isPlanted);
     }
 
-    public Case(boolean isPlanted) {
+    public CaseModel(boolean isPlanted) {
         this.isPlanted = isPlanted;
     }
 

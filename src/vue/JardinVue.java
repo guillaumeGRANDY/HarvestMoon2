@@ -1,15 +1,17 @@
-import model.Case;
-import model.Ground2;
+package vue;
+
+import model.CaseModel;
+import model.JardinModel;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class View extends JFrame {
-    private final Ground2 model;
+public class JardinVue extends JFrame {
+    private final JardinModel jardinModel;
 
-    public View(Ground2 model) {
+    public JardinVue(JardinModel model) {
         super();
-        this.model = model;
+        this.jardinModel = model;
         initialize();
     }
 
@@ -20,8 +22,8 @@ public class View extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         for (int i = 0; i < 100; i++) {
-            Case caseModel = this.model.getCase(i / this.model.getRows(), i % this.model.getCols());
-            CaseJpanel caseJpanel = new CaseJpanel(caseModel);
+            CaseModel caseModel = this.jardinModel.getCase(i / this.jardinModel.getRows(), i % this.jardinModel.getCols());
+            CaseVue caseJpanel = new CaseVue(caseModel);
             caseModel.addObserver(caseJpanel);
             caseModel.NotiAll();
 

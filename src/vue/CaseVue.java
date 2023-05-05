@@ -1,4 +1,6 @@
-import model.Case;
+package vue;
+
+import model.CaseModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,11 +9,11 @@ import java.awt.event.MouseEvent;
 import java.util.Observable;
 import java.util.Observer;
 
-public class CaseJpanel extends JPanel implements Observer {
-    private final Case caseModel;
+public class CaseVue extends JPanel implements Observer {
+    private final CaseModel caseModel;
     private boolean selected;
 
-    public CaseJpanel(Case caseModel) {
+    public CaseVue(CaseModel caseModel) {
         super();
         selected = false;
         this.caseModel = caseModel;
