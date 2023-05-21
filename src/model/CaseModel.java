@@ -1,26 +1,33 @@
 package model;
 
+import model.legume.LegumeModel;
+
 import java.util.Observable;
 
 public class CaseModel extends Observable {
-    private boolean isPlanted = false;
+    private LegumeModel legumeModel = null;
 
+    /**
+     * Savoir si la case a un légume planté
+     * @return true si la case a un légume planté
+     */
     public boolean isPlanted() {
-        return isPlanted;
+        return this.legumeModel != null;
     }
 
-    public void changePlanted() {
-        this.isPlanted = !isPlanted;
+    /**
+     * Plante un légume dans la case
+     *
+     * @param legume légume à planter
+     */
+    public void plant(LegumeModel legume) {
+        this.legumeModel = legume;
         this.setChanged();
-        this.notifyObservers(this.isPlanted);
-    }
-
-    public CaseModel(boolean isPlanted) {
-        this.isPlanted = isPlanted;
+        this.notifyObservers(this.isPlanted());
     }
 
     public void NotiAll() {
         this.setChanged();
-        this.notifyObservers(this.isPlanted);
+        this.notifyObservers(this.isPlanted());
     }
 }

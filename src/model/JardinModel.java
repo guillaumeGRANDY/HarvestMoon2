@@ -23,11 +23,15 @@ public class JardinModel extends Observable {
         plants = new CaseModel[rows][cols];
         this.rows = rows;
         this.cols = cols;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                plants[i][j] = new CaseModel();
+            }
+        }
         changePlants();
     }
 
     public void initGame() {
-        initPlants();
         setChanged();
         notifyObservers(this.plants);
     }
@@ -58,7 +62,6 @@ public class JardinModel extends Observable {
         // run in a timesUntilUpdate
         Runnable runnable = () -> {
             while (true) {
-                initPlants();
                 setChanged();
                 notifyObservers(this.plants);
                 try {
@@ -71,13 +74,5 @@ public class JardinModel extends Observable {
 
         Thread thread = new Thread(runnable);
         thread.start();
-    }
-
-    public void initPlants() {
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-                this.plants[row][col] = new CaseModel(new Random().nextBoolean());
-            }
-        }
     }
 }

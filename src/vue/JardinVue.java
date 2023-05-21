@@ -2,6 +2,7 @@ package vue;
 
 import model.CaseModel;
 import model.JardinModel;
+import model.Ordonnanceur;
 
 import javax.swing.*;
 import java.awt.*;
@@ -52,7 +53,7 @@ public class JardinVue extends JFrame {
 
         for (int i = 0; i < 4; i++) {
             for(int j=0;j<6;j++) {
-                CaseVue uneCase = new CaseVue();
+                CaseVue uneCase = new CaseVue(jardinModel.getCase(i, j));
                 uneCase.setBackground(Color.white);
                 zoneJardin.add(uneCase); // add à la grid
             }
@@ -107,5 +108,6 @@ public class JardinVue extends JFrame {
         menuDown.add(buttonTomate);
 
         setVisible(true);
+        Ordonnanceur.getInstance().start();
     }
 }
