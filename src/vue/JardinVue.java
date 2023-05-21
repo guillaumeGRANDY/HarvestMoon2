@@ -2,7 +2,9 @@ package vue;
 
 import model.CaseModel;
 import model.JardinModel;
+import model.JoueurModel;
 import model.Ordonnanceur;
+import model.legume.Tomate;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +20,7 @@ public class JardinVue extends JFrame {
     }
 
     public void initialize(){
+        JoueurModel.createDefault(1000);
         this.setSize(500, 400);
         BorderLayout windowLayout=new BorderLayout(10, 10);
         this.setLayout(windowLayout);
@@ -39,7 +42,7 @@ public class JardinVue extends JFrame {
         bandeauSup.add(lblDate,BorderLayout.WEST);
 
         //Label pour l'argent
-        JLabel lblArgent=new JLabel("Argent: Inconnu");
+        JLabel lblArgent=new JLabel("Argent: " + JoueurModel.getInstance().getSolde() + "€");
         lblArgent.setFont(new Font("Arial", Font.PLAIN, 24));
         bandeauSup.add(lblArgent,BorderLayout.EAST);
 
@@ -105,6 +108,17 @@ public class JardinVue extends JFrame {
 
         JButton buttonTomate=new JButton(new ImageIcon(new ImageIcon("./src/img/tomate.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
         buttonTomate.setContentAreaFilled(false);
+        buttonTomate.addActionListener(e -> {
+            try {
+                JoueurModel.getInstance().buy(new Tomate());
+                System.out.println(JoueurModel.getInstance().getInventory());
+                lblArgent.setText("Argent: " + JoueurModel.getInstance().getSolde() + "€");
+            } catch (Exception ex) {
+                // show error message in a dialog box swing
+                JOptionPane.showMessageDialog(buttonTomate, ex.getMessage());
+                ex.printStackTrace();
+            }
+        });
         menuDown.add(buttonTomate);
 
         setVisible(true);

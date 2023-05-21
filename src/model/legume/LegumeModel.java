@@ -8,6 +8,11 @@ import java.util.Observable;
 
 public abstract class LegumeModel extends Observable implements Runnable {
     protected StateMachine stateMachine;
+    private boolean isPlanted;
+
+    public boolean isPlanted() {
+        return isPlanted;
+    }
 
     public abstract TypeLegume getType();
 
@@ -34,5 +39,9 @@ public abstract class LegumeModel extends Observable implements Runnable {
             setChanged();
             notifyObservers();
         }
+    }
+
+    public void plant() {
+        this.isPlanted = true;
     }
 }

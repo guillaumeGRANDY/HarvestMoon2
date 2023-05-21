@@ -1,19 +1,17 @@
 package vue;
 
 import model.CaseModel;
+import model.JoueurModel;
 import model.Ordonnanceur;
 import model.legume.LegumeModel;
-import model.legume.Tomate;
-import model.legume.TypeLegume;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-import javax.swing.*;
 
 public class CaseVue extends JPanel implements Observer, MouseListener {
     private Image image ;
@@ -48,11 +46,20 @@ public class CaseVue extends JPanel implements Observer, MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        this.setBackground(Color.LIGHT_GRAY);
-        LegumeModel tomate = new Tomate();
-        caseModel.plant(tomate);
-        tomate.addObserver(CaseVue.this);
-        Ordonnanceur.getInstance().addRunnable(tomate);
+        this.plant();
+    }
+
+    private void plant() {
+        List<LegumeModel> legumesInInventory = JoueurModel.getInstance().getInventory().grainsToPlant();
+        if(legumesInInventory.size() == 0) {
+            JOptionPane.showMessageDialog(this, "Vous n'avez pas de graines dans votre inventaire !");
+            return;
+        }
+        LegumeModel legume = legumesInInventory.get(0);
+        legume.plant();
+        caseModel.plant(legume);
+        legume.addObserver(CaseVue.this);
+        Ordonnanceur.getInstance().addRunnable(legume);
     }
 
     @Override
