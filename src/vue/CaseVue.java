@@ -4,6 +4,7 @@ import model.CaseModel;
 import model.Ordonnanceur;
 import model.legume.LegumeModel;
 import model.legume.Tomate;
+import model.legume.TypeLegume;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,6 +31,11 @@ public class CaseVue extends JPanel implements Observer, MouseListener {
     public CaseVue(CaseModel caseModel) {
         this();
         this.caseModel = caseModel;
+    }
+
+    public void changeImage(String stage)
+    {
+        image= new ImageIcon("./src/img/"+stage+".png").getImage();
     }
 
     @Override
@@ -72,10 +78,10 @@ public class CaseVue extends JPanel implements Observer, MouseListener {
     public void update(Observable o, Object arg) {
         if(o instanceof LegumeModel legumeModel) {
             switch (legumeModel.getCurrentState().stateType()) {
-                case GRAINE -> setBackground(Color.GREEN);
-                case BOURGON -> setBackground(Color.YELLOW);
-                case FLEURIE -> setBackground(Color.ORANGE);
-                case MATURE -> setBackground(Color.RED);
+                case GRAINE -> changeImage("stage1");
+                case BOURGON -> changeImage("stage2");
+                case FLEURIE -> changeImage("stage3");
+                case MATURE -> changeImage(legumeModel.getType().getName());
             }
         }
     }

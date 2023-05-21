@@ -1,7 +1,7 @@
 package model.legume;
 
 public enum TypeLegume {
-    TOMATE("Tomate");
+    TOMATE("tomate");
 
     private final String name;
 
