@@ -3,8 +3,8 @@ package model.legume;
 import model.legume.state.*;
 
 public class Tomate extends LegumeModel {
-
     public Tomate() {
+        super();
         this.stateMachine = new StateMachine() {
 
             public State graine() {

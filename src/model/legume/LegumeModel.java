@@ -4,6 +4,7 @@ import model.legume.state.State;
 import model.legume.state.StateMachine;
 import model.legume.state.StateType;
 
+import java.util.HashMap;
 import java.util.Observable;
 
 public abstract class LegumeModel extends Observable implements Runnable {
@@ -12,6 +13,13 @@ public abstract class LegumeModel extends Observable implements Runnable {
 
     public boolean isPlanted() {
         return isPlanted;
+    }
+
+    public static HashMap<TypeLegume, Integer> quantities = new HashMap<>();
+
+    public LegumeModel() {
+        quantities.putIfAbsent(getType(), 0);
+        quantities.put(getType(), quantities.get(getType()) + 1);
     }
 
     public abstract TypeLegume getType();

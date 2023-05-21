@@ -1,17 +1,19 @@
 package vue;
 
-import model.CaseModel;
-import model.JardinModel;
-import model.JoueurModel;
-import model.Ordonnanceur;
+import model.*;
 import model.legume.Tomate;
+import model.legume.TypeLegume;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.io.IOException;
+import java.util.*;
 
-public class JardinVue extends JFrame {
+public class JardinVue extends JFrame implements Observer {
     private final JardinModel jardinModel;
+
+    private DefaultTableModel tableInventoryModel;
 
     public JardinVue(JardinModel model) {
         super();
@@ -21,6 +23,7 @@ public class JardinVue extends JFrame {
 
     public void initialize(){
         JoueurModel.createDefault(1000);
+        JoueurModel.getInstance().getInventory().addObserver(this);
         this.setSize(500, 400);
         BorderLayout windowLayout=new BorderLayout(10, 10);
         this.setLayout(windowLayout);
@@ -67,13 +70,28 @@ public class JardinVue extends JFrame {
         //créer le menu lateral
         JPanel menuLateral=new JPanel();
         menuLateral.setBackground(Color.WHITE);
-        this.add(menuLateral,windowLayout.EAST);
+        menuLateral.setBorder(new EmptyBorder(10, 10, 10, 10)); // add padding of 10 pixels on all sides
+        this.add(menuLateral, BorderLayout.EAST);
 
 
         JButton buttonRecolte=new JButton("Récolter");
         buttonRecolte.setBackground(new java.awt.Color(46, 171, 0));
         buttonRecolte.setForeground(Color.white);
         menuLateral.add(buttonRecolte);
+
+        String[] columnNames = {"Légume", "Quantité"};
+        tableInventoryModel = new DefaultTableModel(columnNames, 0);
+
+        // Créer le tableau Swing
+        JTable table = new JTable(tableInventoryModel);
+        table.setDefaultEditor(Object.class, null); // empêcher l'édition des cellules
+
+        // Ajouter le tableau au menu latéral
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBackground(Color.WHITE);
+        scrollPane.setBorder(new EmptyBorder(10, 10, 10, 10));
+        menuLateral.setLayout(new BoxLayout(menuLateral, BoxLayout.Y_AXIS)); // set layout to BoxLayout
+        menuLateral.add(scrollPane);
 
         //créer le menu inférieur
         JPanel menuDown=new JPanel();
@@ -123,5 +141,24 @@ public class JardinVue extends JFrame {
 
         setVisible(true);
         Ordonnanceur.getInstance().start();
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if (o instanceof Inventory inventory) {
+            HashMap<TypeLegume, Integer> legumesWithQuantity = inventory.getLegumesTypeWithQuantity();
+
+            // Clear the table model
+            tableInventoryModel.setRowCount(0);
+
+            // Re-populate the table model
+            for (TypeLegume typeLegume : legumesWithQuantity.keySet()) {
+                String type = typeLegume.toString();
+                Integer quantity = legumesWithQuantity.get(typeLegume);
+
+                Object[] data = new Object[] { type, quantity };
+                tableInventoryModel.addRow(data);
+            }
+        }
     }
 }
