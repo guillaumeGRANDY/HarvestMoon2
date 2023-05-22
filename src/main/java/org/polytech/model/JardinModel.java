@@ -1,7 +1,6 @@
-package model;
+package org.polytech.model;
 
 import java.util.Observable;
-import java.util.Random;
 
 public class JardinModel extends Observable {
     private final CaseModel[][] plants;

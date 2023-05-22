@@ -1,17 +1,19 @@
-package vue;
+package org.polytech.vue;
 
-import model.CaseModel;
-import model.Ordonnanceur;
-import model.legume.LegumeModel;
-import model.legume.Tomate;
-import model.legume.TypeLegume;
+
+import org.polytech.model.CaseModel;
+import org.polytech.model.Ordonnanceur;
+import org.polytech.model.legume.LegumeModel;
+import org.polytech.model.legume.Tomate;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Observable;
 import java.util.Observer;
-import javax.swing.*;
 
 public class CaseVue extends JPanel implements Observer, MouseListener {
     private Image image ;
@@ -21,8 +23,10 @@ public class CaseVue extends JPanel implements Observer, MouseListener {
     private JardinVue parent;
 
     public CaseVue() {
+        ImageIcon imageIcon = new ImageIcon("./src/main/java/org/polytech/img/vide.png");
+        image = imageIcon.getImage();
         this.add(labelImage,BorderLayout.CENTER);
-        image = new ImageIcon("./src/img/vide.png").getImage();
+        image = new ImageIcon("./src/main/java/org/polytech/img/vide.png").getImage();
         ImageIcon icon = new ImageIcon(image.getScaledInstance(100, 100, Image.SCALE_DEFAULT));
         labelImage.setIcon(icon);
         this.addMouseListener(this);
@@ -45,7 +49,7 @@ public class CaseVue extends JPanel implements Observer, MouseListener {
 
     public void changeImage(String stage)
     {
-        image=new ImageIcon("./src/img/"+stage+".png").getImage();
+        image= new ImageIcon("./src/main/java/org/polytech/img/"+stage+".png").getImage();
         resizeImage();
     }
 

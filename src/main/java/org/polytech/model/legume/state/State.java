@@ -1,6 +1,7 @@
-package model.legume.state;
+package org.polytech.model.legume.state;
 
-import model.UniteTemps;
+
+import org.polytech.model.UniteTemps;
 
 public abstract class State {
     /**

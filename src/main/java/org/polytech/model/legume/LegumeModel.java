@@ -1,8 +1,9 @@
-package model.legume;
+package org.polytech.model.legume;
 
-import model.legume.state.State;
-import model.legume.state.StateMachine;
-import model.legume.state.StateType;
+
+import org.polytech.model.legume.state.State;
+import org.polytech.model.legume.state.StateMachine;
+import org.polytech.model.legume.state.StateType;
 
 import java.util.Observable;
 

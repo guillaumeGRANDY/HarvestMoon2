@@ -1,6 +1,7 @@
-package model;
+package org.polytech.model;
 
-import model.legume.LegumeModel;
+
+import org.polytech.model.legume.LegumeModel;
 
 import java.util.Observable;
 

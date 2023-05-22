@@ -1,4 +1,4 @@
-package model;
+package org.polytech.model;
 
 public class JoueurModel {
     /**

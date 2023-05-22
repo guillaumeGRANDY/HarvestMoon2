@@ -1,4 +1,4 @@
-package model.legume.state;
+package org.polytech.model.legume.state;
 
 public abstract class StateMachine {
     private State currentState;

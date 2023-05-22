@@ -1,4 +1,4 @@
-package vue;
+package org.polytech.vue;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,7 +7,7 @@ public class RightMenu extends JPanel {
     private Image backgroundImage;
 
     public RightMenu() {
-        this.backgroundImage = new ImageIcon("./src/img/coffre.png").getImage();
+        this.backgroundImage = new ImageIcon("./src/main/java/org/polytech/img/coffre.png").getImage();
         this.setOpaque(false);
     }
 

@@ -1,4 +1,4 @@
-package model.legume;
+package org.polytech.model.legume;
 
 public enum TypeLegume {
     TOMATE("tomate");

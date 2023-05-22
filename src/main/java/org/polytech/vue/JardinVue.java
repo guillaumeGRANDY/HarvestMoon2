@@ -1,9 +1,7 @@
-package vue;
+package org.polytech.vue;
 
-import com.sun.tools.javac.Main;
-import model.CaseModel;
-import model.JardinModel;
-import model.Ordonnanceur;
+import org.polytech.model.JardinModel;
+import org.polytech.model.Ordonnanceur;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

@@ -1,4 +1,4 @@
-package vue;
+package org.polytech.vue;
 
 import javax.swing.*;
 import java.awt.*;

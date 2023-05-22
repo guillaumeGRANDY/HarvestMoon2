@@ -1,6 +1,8 @@
-package model.legume;
+package org.polytech.model.legume;
 
-import model.legume.state.*;
+import org.polytech.model.legume.state.State;
+import org.polytech.model.legume.state.StateMachine;
+import org.polytech.model.legume.state.StateType;
 
 public class Tomate extends LegumeModel {
 

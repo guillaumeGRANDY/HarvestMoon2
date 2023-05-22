@@ -1,8 +1,9 @@
-import model.JardinModel;
-import vue.JardinVue;
+package org.polytech;
+
+import org.polytech.model.JardinModel;
+import org.polytech.vue.JardinVue;
 
 import javax.swing.*;
-import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
