@@ -10,7 +10,7 @@ public class Tomate extends LegumeModel {
         this.stateMachine = new StateMachine() {
 
             public State graine() {
-                return new State(10_000) {
+                return new State(250) {
                     public State nextState() {
                         return bourgon();
                     }
@@ -22,7 +22,7 @@ public class Tomate extends LegumeModel {
             }
 
             public State bourgon() {
-                return new State(5000) {
+                return new State(250) {
                     @Override
                     public State nextState() {
                         return fleurie();
@@ -36,7 +36,7 @@ public class Tomate extends LegumeModel {
             }
 
             public State fleurie() {
-                return new State(10_000) {
+                return new State(250) {
                     @Override
                     public State nextState() {
                         return mature();
@@ -50,7 +50,7 @@ public class Tomate extends LegumeModel {
             }
 
             public State mature() {
-                return new State(0) {
+                return new State(250) {
                     @Override
                     public State nextState() {
                         return mature();

@@ -1,25 +1,27 @@
 package org.polytech.model.legume.state;
 
-
-import org.polytech.model.UniteTemps;
-
 public abstract class State {
     /**
-     * Le temps restant avant la transition vers l'état suivant
-     * Le temps est en milliseconde
+     * Seuil de croissance à atteindre
      */
-    private long tempsAvantTransition;
+    private long seuilCroissance;
 
-    public double getTempsAvantTransition() {
-        return tempsAvantTransition;
+    public double getSeuilCroissance() {
+        return seuilCroissance;
+    }
+
+    private long stadeCroissance = 0;
+
+    public long getStadeCroissance() {
+        return stadeCroissance;
     }
 
     /**
      * Constructeur de l'état
-     * @param tempsAvantTransition le temps restant avant la transition vers l'état suivant en milliseconde
+     * @param seuilCroissance score de croissance avant de transiter vers l'état suivant
      */
-    public State(long tempsAvantTransition) {
-        this.tempsAvantTransition = tempsAvantTransition;
+    public State(long seuilCroissance) {
+        this.seuilCroissance = seuilCroissance;
     }
 
     /**
@@ -30,9 +32,10 @@ public abstract class State {
     public abstract StateType stateType();
 
     /**
-     * Décrémente le temps restant de 1000ms avant le passage au prochain état
+     * Incrémente le score de croissance
+     * @param score le score à décrémenter
      */
-    public void decrementerTempsRestant() {
-        this.tempsAvantTransition -= UniteTemps.ECHELLE_TEMPS;
+    public void incrementScore(long score) {
+        this.stadeCroissance += score;
     }
 }

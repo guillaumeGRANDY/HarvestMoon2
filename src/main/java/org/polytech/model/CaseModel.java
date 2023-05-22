@@ -5,7 +5,7 @@ import org.polytech.model.legume.LegumeModel;
 
 import java.util.Observable;
 
-public class CaseModel extends Observable {
+public class CaseModel extends Observable implements Runnable {
     private LegumeModel legumeModel = null;
 
     /**
@@ -30,5 +30,17 @@ public class CaseModel extends Observable {
     public void NotiAll() {
         this.setChanged();
         this.notifyObservers(this.isPlanted());
+    }
+
+    /**
+     * Fait croitre le légume
+     */
+    @Override
+    public void run() {
+        if(isPlanted()) {
+            legumeModel.croissance(10);
+            setChanged();
+            notifyObservers();
+        }
     }
 }
