@@ -1,5 +1,8 @@
 package org.polytech.vue;
 
+import org.polytech.utils.ExtensionImage;
+import org.polytech.utils.Utils;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,7 +10,7 @@ public class Background extends JPanel {
     private Image image;
 
     public Background() {
-        this.image = new ImageIcon("./src/main/java/org/polytech/img/minecraftDirt.png").getImage();
+        this.image = Utils.getImageFromResources("minecraftDirt", ExtensionImage.PNG).getImage();
         this.setOpaque(false);
     }
 

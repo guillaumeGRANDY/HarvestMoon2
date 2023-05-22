@@ -3,12 +3,10 @@ package org.polytech.vue;
 import org.polytech.model.JardinModel;
 import org.polytech.model.Ordonnanceur;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.io.IOException;
 
 public class JardinVue extends JFrame {
     private final JardinModel jardinModel;

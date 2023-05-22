@@ -1,5 +1,8 @@
 package org.polytech.vue;
 
+import org.polytech.utils.ExtensionImage;
+import org.polytech.utils.Utils;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -17,9 +20,9 @@ public class BottomMenuItem extends JPanel {
 
     public BottomMenuItem(String image){
         this.parent=parent;
-        this.backgroundImage=new ImageIcon("./src/main/java/org/polytech/img/case.png").getImage();
+        this.backgroundImage= Utils.getImageFromResources("case", ExtensionImage.PNG).getImage();
 
-        this.image = new ImageIcon("./src/main/java/org/polytech/img/"+image+".png").getImage();
+        this.image = Utils.getImageFromResources(image, ExtensionImage.PNG).getImage();
         ImageIcon icon = new ImageIcon(this.image.getScaledInstance(70, 70, Image.SCALE_DEFAULT));
         labelImage=new JLabel(icon);
 

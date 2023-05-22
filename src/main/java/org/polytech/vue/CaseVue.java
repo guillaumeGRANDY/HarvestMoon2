@@ -5,6 +5,8 @@ import org.polytech.model.CaseModel;
 import org.polytech.model.Ordonnanceur;
 import org.polytech.model.legume.LegumeModel;
 import org.polytech.model.legume.Tomate;
+import org.polytech.utils.ExtensionImage;
+import org.polytech.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,10 +25,10 @@ public class CaseVue extends JPanel implements Observer, MouseListener {
     private JardinVue parent;
 
     public CaseVue() {
-        ImageIcon imageIcon = new ImageIcon("./src/main/java/org/polytech/img/vide.png");
+        ImageIcon imageIcon = Utils.getImageFromResources("vide", ExtensionImage.PNG);
         image = imageIcon.getImage();
         this.add(labelImage,BorderLayout.CENTER);
-        image = new ImageIcon("./src/main/java/org/polytech/img/vide.png").getImage();
+        image = Utils.getImageFromResources("vide", ExtensionImage.PNG).getImage();
         ImageIcon icon = new ImageIcon(image.getScaledInstance(100, 100, Image.SCALE_DEFAULT));
         labelImage.setIcon(icon);
         this.addMouseListener(this);
@@ -49,7 +51,7 @@ public class CaseVue extends JPanel implements Observer, MouseListener {
 
     public void changeImage(String stage)
     {
-        image= new ImageIcon("./src/main/java/org/polytech/img/"+stage+".png").getImage();
+        image = Utils.getImageFromResources(stage, ExtensionImage.PNG).getImage();
         resizeImage();
     }
 
