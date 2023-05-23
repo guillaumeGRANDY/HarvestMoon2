@@ -11,6 +11,13 @@ public abstract class LegumeModel extends Observable implements Runnable {
     protected StateMachine stateMachine;
     private boolean isPlanted;
 
+    private static int nextId = 0;
+    private int id = 0;
+
+    public int getId() {
+        return id;
+    }
+
     public boolean isPlanted() {
         return isPlanted;
     }
@@ -18,6 +25,7 @@ public abstract class LegumeModel extends Observable implements Runnable {
     public static HashMap<TypeLegume, Integer> quantities = new HashMap<>();
 
     public LegumeModel() {
+        this.id = ++nextId;
         quantities.putIfAbsent(getType(), 0);
         quantities.put(getType(), quantities.get(getType()) + 1);
     }

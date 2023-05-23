@@ -1,14 +1,18 @@
 package vue;
 
 import model.*;
+import model.legume.LegumeModel;
 import model.legume.Tomate;
 import model.legume.TypeLegume;
+import model.legume.state.State;
+import model.legume.state.StateType;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 public class JardinVue extends JFrame implements Observer {
     private final JardinModel jardinModel;
@@ -79,7 +83,7 @@ public class JardinVue extends JFrame implements Observer {
         buttonRecolte.setForeground(Color.white);
         menuLateral.add(buttonRecolte);
 
-        String[] columnNames = {"Légume", "Quantité"};
+        String[] columnNames = {"Id", "Légume", "Etat", "Planté"};
         tableInventoryModel = new DefaultTableModel(columnNames, 0);
 
         // Créer le tableau Swing
@@ -128,7 +132,9 @@ public class JardinVue extends JFrame implements Observer {
         buttonTomate.setContentAreaFilled(false);
         buttonTomate.addActionListener(e -> {
             try {
-                JoueurModel.getInstance().buy(new Tomate());
+                LegumeModel legume = new Tomate();
+                JoueurModel.getInstance().buy(legume);
+                legume.addObserver(this);
                 System.out.println(JoueurModel.getInstance().getInventory());
                 lblArgent.setText("Argent: " + JoueurModel.getInstance().getSolde() + "€");
             } catch (Exception ex) {
@@ -146,18 +152,31 @@ public class JardinVue extends JFrame implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         if (o instanceof Inventory inventory) {
-            HashMap<TypeLegume, Integer> legumesWithQuantity = inventory.getLegumesTypeWithQuantity();
+            List<LegumeModel> legumes = inventory.getLegumes();
 
             // Clear the table model
             tableInventoryModel.setRowCount(0);
 
             // Re-populate the table model
-            for (TypeLegume typeLegume : legumesWithQuantity.keySet()) {
-                String type = typeLegume.toString();
-                Integer quantity = legumesWithQuantity.get(typeLegume);
+            for (LegumeModel legume : legumes) {
+                String name = legume.getType().toString();
+                String currentState = legume.getCurrentState().stateType().toString();
+                String isPlanted = legume.isPlanted() ? "Oui" : "Non";
 
-                Object[] data = new Object[] { type, quantity };
+                Object[] data = new Object[] { legume.getId() , name, currentState, isPlanted };
                 tableInventoryModel.addRow(data);
+            }
+        }
+
+        if(o instanceof LegumeModel legumeModel) {
+            for (Vector vector : tableInventoryModel.getDataVector()) {
+                int id = (int) vector.get(0);
+                if(id == legumeModel.getId()) {
+                    vector.set(2, legumeModel.getCurrentState().stateType().toString());
+                    vector.set(3, legumeModel.isPlanted() ? "Oui" : "Non");
+                    tableInventoryModel.fireTableDataChanged();
+                    break;
+                }
             }
         }
     }
