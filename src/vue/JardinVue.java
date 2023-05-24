@@ -1,11 +1,15 @@
 package vue;
 
+import com.sun.tools.javac.Main;
 import model.CaseModel;
 import model.JardinModel;
 import model.Ordonnanceur;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.io.IOException;
 
 public class JardinVue extends JFrame {
@@ -14,98 +18,109 @@ public class JardinVue extends JFrame {
     public JardinVue(JardinModel model) {
         super();
         this.jardinModel = model;
+
+        this.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                revalidate();
+            }
+        });
+
         initialize();
     }
 
-    public void initialize(){
-        this.setSize(500, 400);
-        BorderLayout windowLayout=new BorderLayout(10, 10);
-        this.setLayout(windowLayout);
+    public void initialize() {
+
+        //fenetre
+        this.setSize(800, 600);
         this.setTitle("HarvestMoon2");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        //paramètre de la fenêtre
-        this.getContentPane().setBackground(Color.GRAY);
+        Background background = new Background();
+        GridBagLayout windowLayout = new GridBagLayout();
+        background.setLayout(windowLayout);
+        this.add(background);
+
+        // Création des contraintes GridBagConstraints
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.insets = new Insets(10, 10, 10, 10);
 
         //créer le bandeau supérieur
-        JPanel bandeauSup=new JPanel();
-        bandeauSup.setBackground(Color.WHITE);
-        bandeauSup.setLayout(new BorderLayout());
-        this.add(bandeauSup,windowLayout.NORTH);
+        JPanel bandeauSup = new JPanel();
+        bandeauSup.setBackground(new java.awt.Color(0, 0, 0, 0));
+        bandeauSup.setLayout(new GridLayout(1, 2));
+        bandeauSup.setPreferredSize(new Dimension(800, 200));
+
+        constraints.weightx = 1.0;
+        constraints.weighty = 0.1; // To allocate space in the vertical direction
+        constraints.fill = GridBagConstraints.HORIZONTAL; // To make it fill the horizontal space
+        constraints.gridx = 0; // To make sure it starts at the left
+        constraints.gridy = 0; // To put it at the top
+        constraints.gridwidth = 3; // To make it extend across all columns
+        background.add(bandeauSup, constraints);
 
         //Label de la date
-        JLabel lblDate=new JLabel("Date Inconnu");
-        lblDate.setFont(new Font("Arial", Font.PLAIN, 30));
-        bandeauSup.add(lblDate,BorderLayout.WEST);
+        JLabel lblDate = new JLabel("Date Inconnu");
+        lblDate.setHorizontalAlignment(JLabel.CENTER);
+        lblDate.setFont(new Font("Arial", Font.PLAIN, 35));
+        lblDate.setForeground(Color.WHITE);
+        bandeauSup.add(lblDate);
 
         //Label pour l'argent
-        JLabel lblArgent=new JLabel("Argent: Inconnu");
-        lblArgent.setFont(new Font("Arial", Font.PLAIN, 24));
-        bandeauSup.add(lblArgent,BorderLayout.EAST);
+        JLabel lblArgent = new JLabel("Argent: Inconnu");
+        lblArgent.setHorizontalAlignment(JLabel.CENTER);
+        lblArgent.setFont(new Font("Arial", Font.PLAIN, 35));
+        lblArgent.setForeground(Color.WHITE);
+        bandeauSup.add(lblArgent, BorderLayout.EAST);
 
         //créer le jardin
-        JPanel zoneJardin=new JPanel();
-        zoneJardin.setBackground(Color.lightGray);
-        GridLayout jardinLayout=new GridLayout(4,6);
-        jardinLayout.setHgap(10);
-        jardinLayout.setVgap(10);
+        JPanel zoneJardin = new JPanel();
+        zoneJardin.setBackground(new java.awt.Color(0, 0, 0, 0));
+        GridLayout jardinLayout = new GridLayout(4, 6, 10, 10);
         zoneJardin.setLayout(jardinLayout);
 
         for (int i = 0; i < 4; i++) {
-            for(int j=0;j<6;j++) {
-                CaseVue uneCase = new CaseVue(jardinModel.getCase(i, j));
-                uneCase.setBackground(Color.white);
+            for (int j = 0; j < 6; j++) {
+                CaseVue uneCase = new CaseVue(jardinModel.getCase(i, j),this);
+                uneCase.setBackground(new java.awt.Color(0, 0, 0, 0));
                 zoneJardin.add(uneCase); // add à la grid
             }
         }
 
-        this.add(zoneJardin,windowLayout.CENTER);
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        constraints.gridwidth = 2;
+        constraints.weightx = 2.0;
+        constraints.weighty = 1.0; // To allocate more space to this component
+        constraints.fill = GridBagConstraints.BOTH; // To make it fill the available space
+        background.add(zoneJardin, constraints);
 
         //créer le menu lateral
-        JPanel menuLateral=new JPanel();
-        menuLateral.setBackground(Color.WHITE);
-        this.add(menuLateral,windowLayout.EAST);
+        RightMenu menuLateral = new RightMenu();
+        menuLateral.setBackground(new java.awt.Color(0, 0, 0, 0.5F));
 
+        constraints.gridx = 2;
+        constraints.gridy = 1;
+        constraints.gridwidth = 1;
+        constraints.weightx = 1.0;
+        constraints.weighty = 1.0; // To allocate more space to this component
+        background.add(menuLateral, constraints);
 
-        JButton buttonRecolte=new JButton("Récolter");
+        JButton buttonRecolte = new JButton("Récolter");
         buttonRecolte.setBackground(new java.awt.Color(46, 171, 0));
         buttonRecolte.setForeground(Color.white);
         menuLateral.add(buttonRecolte);
 
         //créer le menu inférieur
-        JPanel menuDown=new JPanel();
-        menuLateral.setBackground(Color.WHITE);
-        GridLayout downLayout=new GridLayout(1,7);
-        menuDown.setLayout(downLayout);
-        this.add(menuDown,windowLayout.SOUTH);
+        BottomMenu menuDown = new BottomMenu();
 
-        JButton buttonChou=new JButton(new ImageIcon(new ImageIcon("./src/img/chou.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
-        buttonChou.setContentAreaFilled(false);
-        menuDown.add(buttonChou);
-
-        JButton buttonAubergine=new JButton(new ImageIcon(new ImageIcon("./src/img/aubergine.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
-        buttonAubergine.setContentAreaFilled(false);
-        menuDown.add(buttonAubergine);
-
-        JButton buttonCitrouille=new JButton(new ImageIcon(new ImageIcon("./src/img/citrouille.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
-        buttonCitrouille.setContentAreaFilled(false);
-        menuDown.add(buttonCitrouille);
-
-        JButton buttonAil=new JButton(new ImageIcon(new ImageIcon("./src/img/ail.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
-        buttonAil.setContentAreaFilled(false);
-        menuDown.add(buttonAil);
-
-        JButton buttonCarotte=new JButton(new ImageIcon(new ImageIcon("./src/img/carotte.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
-        buttonCarotte.setContentAreaFilled(false);
-        menuDown.add(buttonCarotte);
-
-        JButton buttonOignon=new JButton(new ImageIcon(new ImageIcon("./src/img/oignon.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
-        buttonOignon.setContentAreaFilled(false);
-        menuDown.add(buttonOignon);
-
-        JButton buttonTomate=new JButton(new ImageIcon(new ImageIcon("./src/img/tomate.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
-        buttonTomate.setContentAreaFilled(false);
-        menuDown.add(buttonTomate);
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        constraints.gridwidth = 3;
+        constraints.weightx = 1.0;
+        constraints.weighty = 0.1; // Réduire le poids pour allouer moins d'espace
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        background.add(menuDown, constraints);
 
         setVisible(true);
         Ordonnanceur.getInstance().start();
