@@ -32,20 +32,24 @@ public class BarSoleil extends JPanel implements Observer {
         sun= new ImageIcon(Utils.getImageFromResources("sun", ExtensionImage.PNG).getScaledInstance(20, 20, Image.SCALE_DEFAULT));
         noSun= new ImageIcon(Utils.getImageFromResources("noSun", ExtensionImage.PNG).getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 
-        actualiseSun(5);
+        for(int i=0;i<10;i++)
+        {
+            if(i<5) {
+                this.bar[i].setIcon(sun);
+            }
+            else
+            {
+                this.bar[i].setIcon(noSun);
+            }
+        }
     }
 
     public void actualiseSun(int value)
     {
-        for(int i=0;i<10;i++)
-        {
-            if(i<value)
-            {
-                this.bar[i].setIcon(sun);
-            }
-            else {
-                this.bar[i].setIcon(noSun);
-            }
+        this.bar[value].setIcon(sun);
+
+        if(value<9) {
+            this.bar[value + 1].setIcon(noSun);
         }
         this.repaint();
     }

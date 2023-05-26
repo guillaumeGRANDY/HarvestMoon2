@@ -158,8 +158,10 @@ public class JardinVue extends JFrame {
 
 
         this.jardinModel.getMeteo().addObserver(menuDown.getBarSoleil());
+        this.jardinModel.getMeteo().addObserver(menuDown.getBarPluit());
         this.joueurModel.addObserver(menuDown.getExpBar());
         initArgentLabel();
+
         setVisible(true);
         Ordonnanceur.getInstance().start();
     }
