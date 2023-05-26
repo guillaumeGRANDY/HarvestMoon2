@@ -10,7 +10,7 @@ public class RightMenu extends JPanel {
     private Image backgroundImage;
 
     public RightMenu() {
-        this.backgroundImage = Utils.getImageFromResources("coffre", ExtensionImage.PNG).getImage();
+        this.backgroundImage = Utils.getImageIconFromResources("coffre", ExtensionImage.PNG).getImage();
         this.setOpaque(false);
     }
 

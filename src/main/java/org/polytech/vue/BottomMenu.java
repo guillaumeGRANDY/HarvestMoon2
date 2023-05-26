@@ -7,6 +7,8 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 
+import static java.awt.GridBagConstraints.LINE_START;
+
 public class BottomMenu extends JPanel implements MouseListener {
     BottomMenuItem SelectedBotton;
 
@@ -24,11 +26,18 @@ public class BottomMenu extends JPanel implements MouseListener {
         GridBagConstraints constraints = new GridBagConstraints();
         this.setLayout(bottomMenLayout);
 
+        BarSoleil barSoleil=new BarSoleil();
+        constraints.gridx = 0; // To make sure it starts at the left
+        constraints.gridy = 0; // To put it at the top
+        constraints.gridwidth = 1;
+        constraints.anchor=LINE_START;
+        this.add(barSoleil,constraints);
+
         ExpBar expBar=new ExpBar();
         expBar.setPreferredSize(new Dimension(800, 15));
         expBar.setBackground(new java.awt.Color(0, 0, 0, 0));
         constraints.gridx = 0; // To make sure it starts at the left
-        constraints.gridy = 0; // To put it at the top
+        constraints.gridy = 1; // To put it at the top
         constraints.gridwidth = 1;
         constraints.fill = GridBagConstraints.HORIZONTAL;
         this.add(expBar,constraints);
@@ -38,7 +47,7 @@ public class BottomMenu extends JPanel implements MouseListener {
         casePanel.setLayout(caseLayout);
 
         constraints.gridx = 0; // To make sure it starts at the left
-        constraints.gridy = 1; // To put it at the top
+        constraints.gridy = 2; // To put it at the top
         constraints.gridwidth = 1;
         this.add(casePanel,constraints);
 

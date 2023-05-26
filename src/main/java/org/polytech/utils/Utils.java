@@ -1,6 +1,7 @@
 package org.polytech.utils;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.Objects;
 
 public class Utils {
@@ -10,7 +11,11 @@ public class Utils {
      * @param extension son extension
      * @return une image
      */
-    public static ImageIcon getImageFromResources(String name, ExtensionImage extension) {
+    public static ImageIcon getImageIconFromResources(String name, ExtensionImage extension) {
         return new ImageIcon(Objects.requireNonNull(Utils.class.getClassLoader().getResource(name + extension.getExtension())));
+    }
+
+    public static Image getImageFromResources(String name, ExtensionImage extension) {
+        return new ImageIcon(Objects.requireNonNull(Utils.class.getClassLoader().getResource(name + extension.getExtension()))).getImage();
     }
 }
