@@ -2,36 +2,112 @@ package org.polytech.vue;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
 
-public class BottomMenu extends JPanel {
+public class BottomMenu extends JPanel implements MouseListener {
+    BottomMenuItem SelectedBotton;
+
+    BottomMenuItem buttonCactus;
+    BottomMenuItem buttonFleurViolet;
 
     public BottomMenu() {
+
         this.setBackground(new java.awt.Color(0, 0, 0, 0));
-        GridLayout downLayout = new GridLayout(1, 7);
-        this.setLayout(downLayout);
 
-        BottomMenuItem buttonCactus=new BottomMenuItem("cactus");
-        this.add(buttonCactus);
+        GridLayout menuLayout = new GridLayout(1, 7,0,0);
+        this.setLayout(menuLayout);
 
-        BottomMenuItem buttonFleurViolet=new BottomMenuItem("fleurViolet");
-        this.add(buttonFleurViolet);
+        GridBagLayout bottomMenLayout = new GridBagLayout();
+        GridBagConstraints constraints = new GridBagConstraints();
+        this.setLayout(bottomMenLayout);
+
+        ExpBar expBar=new ExpBar();
+        expBar.setPreferredSize(new Dimension(800, 15));
+        expBar.setBackground(new java.awt.Color(0, 0, 0, 0));
+        constraints.gridx = 0; // To make sure it starts at the left
+        constraints.gridy = 0; // To put it at the top
+        constraints.gridwidth = 1;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        this.add(expBar,constraints);
+
+        JPanel casePanel=new JPanel();
+        GridLayout caseLayout = new GridLayout(1, 7);
+        casePanel.setLayout(caseLayout);
+
+        constraints.gridx = 0; // To make sure it starts at the left
+        constraints.gridy = 1; // To put it at the top
+        constraints.gridwidth = 1;
+        this.add(casePanel,constraints);
+
+        buttonCactus=new BottomMenuItem("cactus");
+        buttonCactus.addMouseListener(this);
+        casePanel.add(buttonCactus);
+
+        buttonFleurViolet=new BottomMenuItem("fleurViolet");
+        buttonFleurViolet.addMouseListener(this);
+        casePanel.add(buttonFleurViolet);
 
         BottomMenuItem buttonFleurOrange=new BottomMenuItem("fleurOrange");
-        this.add(buttonFleurOrange);
+        buttonFleurOrange.addMouseListener(this);
+        casePanel.add(buttonFleurOrange);
 
         BottomMenuItem buttonFleurBleu=new BottomMenuItem("fleurBleu");
-        this.add(buttonFleurBleu);
+        buttonFleurBleu.addMouseListener(this);
+        casePanel.add(buttonFleurBleu);
 
         BottomMenuItem buttonFleurRouge=new BottomMenuItem("fleurRouge");
-        this.add(buttonFleurRouge);
+        buttonFleurRouge.addMouseListener(this);
+        casePanel.add(buttonFleurRouge);
 
         BottomMenuItem buttonFleurJaune=new BottomMenuItem("fleurJaune");
-        this.add(buttonFleurJaune);
+        buttonFleurJaune.addMouseListener(this);
+        casePanel.add(buttonFleurJaune);
 
         BottomMenuItem buttonChampignonMarron=new BottomMenuItem("champignonMarron");
-        this.add(buttonChampignonMarron);
+        buttonChampignonMarron.addMouseListener(this);
+        casePanel.add(buttonChampignonMarron);
 
         BottomMenuItem buttonChampignonRouge=new BottomMenuItem("champignonRouge");
-        this.add(buttonChampignonRouge);
+        buttonChampignonRouge.addMouseListener(this);
+        casePanel.add(buttonChampignonRouge);
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+        System.out.println("mouse click");
+
+        //enleve l'image de fond spécial
+        if(SelectedBotton!=null)
+        {
+            SelectedBotton.setBackgroundImage("case");
+        }
+
+        //ajoute l'image de fond spécial
+        ((BottomMenuItem) e.getSource()).setBackgroundImage("caseSelectionne");
+        SelectedBotton=((BottomMenuItem) e.getSource());
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 }

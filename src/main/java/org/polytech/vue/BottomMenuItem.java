@@ -8,12 +8,12 @@ import java.awt.*;
 
 public class BottomMenuItem extends JPanel {
 
-    Image image;
-    Image backgroundImage;
+    private Image image;
+    private Image backgroundImage;
 
-    JLabel labelImage;
+    private JLabel labelImage;
 
-    JardinVue parent;
+    private JardinVue parent;
 
     public BottomMenuItem() {
     }
@@ -48,5 +48,10 @@ public class BottomMenuItem extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(backgroundImage, 0, 0, this.getWidth(), this.getHeight(), this);
+    }
+
+    public void setBackgroundImage(String image) {
+        this.backgroundImage = Utils.getImageFromResources(image, ExtensionImage.PNG).getImage();
+        this.repaint();
     }
 }
