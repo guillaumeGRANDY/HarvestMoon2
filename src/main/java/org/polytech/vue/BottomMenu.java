@@ -1,16 +1,22 @@
 package org.polytech.vue;
 
+import org.polytech.model.legume.TypeLegume;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.IOException;
 
 import static java.awt.GridBagConstraints.LINE_START;
 
 public class BottomMenu extends JPanel implements MouseListener {
-    private BottomMenuItem SelectedBotton;
+    private final ExpBar expBar;
+
+    private BottomMenuItem selectedBottomItem;
+
+    public BottomMenuItem getSelectedBottomItem() {
+        return selectedBottomItem;
+    }
 
     private BottomMenuItem buttonCactus;
     private BottomMenuItem buttonFleurViolet;
@@ -35,7 +41,7 @@ public class BottomMenu extends JPanel implements MouseListener {
         constraints.anchor=LINE_START;
         this.add(barSoleil,constraints);
 
-        ExpBar expBar=new ExpBar();
+        expBar=new ExpBar();
         expBar.setPreferredSize(new Dimension(800, 15));
         expBar.setBackground(new java.awt.Color(0, 0, 0, 0));
         constraints.gridx = 0; // To make sure it starts at the left
@@ -53,35 +59,35 @@ public class BottomMenu extends JPanel implements MouseListener {
         constraints.gridwidth = 1;
         this.add(casePanel,constraints);
 
-        buttonCactus=new BottomMenuItem("cactus");
+        buttonCactus=new BottomMenuItem("cactus", TypeLegume.TOMATE);
         buttonCactus.addMouseListener(this);
         casePanel.add(buttonCactus);
 
-        buttonFleurViolet=new BottomMenuItem("fleurViolet");
+        buttonFleurViolet=new BottomMenuItem("fleurViolet", TypeLegume.TOMATE);
         buttonFleurViolet.addMouseListener(this);
         casePanel.add(buttonFleurViolet);
 
-        BottomMenuItem buttonFleurOrange=new BottomMenuItem("fleurOrange");
+        BottomMenuItem buttonFleurOrange=new BottomMenuItem("fleurOrange", TypeLegume.TOMATE);
         buttonFleurOrange.addMouseListener(this);
         casePanel.add(buttonFleurOrange);
 
-        BottomMenuItem buttonFleurBleu=new BottomMenuItem("fleurBleu");
+        BottomMenuItem buttonFleurBleu=new BottomMenuItem("fleurBleu", TypeLegume.TOMATE);
         buttonFleurBleu.addMouseListener(this);
         casePanel.add(buttonFleurBleu);
 
-        BottomMenuItem buttonFleurRouge=new BottomMenuItem("fleurRouge");
+        BottomMenuItem buttonFleurRouge=new BottomMenuItem("fleurRouge", TypeLegume.TOMATE);
         buttonFleurRouge.addMouseListener(this);
         casePanel.add(buttonFleurRouge);
 
-        BottomMenuItem buttonFleurJaune=new BottomMenuItem("fleurJaune");
+        BottomMenuItem buttonFleurJaune=new BottomMenuItem("fleurJaune", TypeLegume.TOMATE);
         buttonFleurJaune.addMouseListener(this);
         casePanel.add(buttonFleurJaune);
 
-        BottomMenuItem buttonChampignonMarron=new BottomMenuItem("champignonMarron");
+        BottomMenuItem buttonChampignonMarron=new BottomMenuItem("champignonMarron", TypeLegume.TOMATE);
         buttonChampignonMarron.addMouseListener(this);
         casePanel.add(buttonChampignonMarron);
 
-        BottomMenuItem buttonChampignonRouge=new BottomMenuItem("champignonRouge");
+        BottomMenuItem buttonChampignonRouge=new BottomMenuItem("champignonRouge", TypeLegume.TOMATE);
         buttonChampignonRouge.addMouseListener(this);
         casePanel.add(buttonChampignonRouge);
     }
@@ -90,20 +96,23 @@ public class BottomMenu extends JPanel implements MouseListener {
         return barSoleil;
     }
 
+    public ExpBar getExpBar() {
+        return expBar;
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
-
         System.out.println("mouse click");
 
         //enleve l'image de fond spécial
-        if(SelectedBotton!=null)
+        if(selectedBottomItem !=null)
         {
-            SelectedBotton.setBackgroundImage("case");
+            selectedBottomItem.setBackgroundImage("case");
         }
 
         //ajoute l'image de fond spécial
         ((BottomMenuItem) e.getSource()).setBackgroundImage("caseSelectionne");
-        SelectedBotton=((BottomMenuItem) e.getSource());
+        selectedBottomItem =((BottomMenuItem) e.getSource());
     }
 
     @Override

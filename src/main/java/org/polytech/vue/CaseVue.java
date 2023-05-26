@@ -3,8 +3,9 @@ package org.polytech.vue;
 
 import org.polytech.model.CaseModel;
 import org.polytech.model.Ordonnanceur;
+import org.polytech.model.legume.LegumeFabrique;
 import org.polytech.model.legume.LegumeModel;
-import org.polytech.model.legume.Tomate;
+import org.polytech.model.legume.TypeLegume;
 import org.polytech.utils.ExtensionImage;
 import org.polytech.utils.Utils;
 
@@ -16,6 +17,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Optional;
 
 public class CaseVue extends JPanel implements Observer, MouseListener {
     private Image image ;
@@ -66,10 +68,30 @@ public class CaseVue extends JPanel implements Observer, MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        LegumeModel tomate = new Tomate();
+        this.buyAndPlant();
+    }
+
+    private void buyAndPlant() {
+        Optional<BottomMenuItem> optionalBottomMenuItem = Optional.ofNullable(parent.getMenuDown().getSelectedBottomItem());
+        if(optionalBottomMenuItem.isPresent()) {
+            TypeLegume typeLegume = optionalBottomMenuItem.get().getTypeLegume();
+            LegumeModel legumeSelected = LegumeFabrique.createLegume(typeLegume);
+            try {
+                parent.getJoueurModel().buy(legumeSelected);
+                this.plant(legumeSelected);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Vous n'avez pas assez d'argent");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Veuillez séléctionner un légume");
+        }
+    }
+
+    private void plant(LegumeModel legume) {
+        legume.plant();
+        caseModel.plant(legume);
         changeImage("stage1");
-        caseModel.plant(tomate);
-        tomate.addObserver(CaseVue.this);
+        legume.addObserver(CaseVue.this);
     }
 
     @Override

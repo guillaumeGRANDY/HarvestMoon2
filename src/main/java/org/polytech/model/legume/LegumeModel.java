@@ -5,10 +5,28 @@ import org.polytech.model.legume.state.State;
 import org.polytech.model.legume.state.StateMachine;
 import org.polytech.model.legume.state.StateType;
 
+import java.util.HashMap;
 import java.util.Observable;
 
 public abstract class LegumeModel extends Observable {
     protected StateMachine stateMachine;
+
+    private boolean isPlanted;
+
+    public boolean isPlanted() {
+        return isPlanted;
+    }
+
+    private static int nextId = 0;
+    private int id = 0;
+
+    public static HashMap<TypeLegume, Integer> quantities = new HashMap<>();
+
+    public LegumeModel() {
+        this.id = ++nextId;
+        quantities.putIfAbsent(getType(), 0);
+        quantities.put(getType(), quantities.get(getType()) + 1);
+    }
 
     public abstract TypeLegume getType();
 
@@ -35,5 +53,9 @@ public abstract class LegumeModel extends Observable {
             setChanged();
             notifyObservers();
         }
+    }
+
+    public void plant() {
+        this.isPlanted = true;
     }
 }

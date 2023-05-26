@@ -7,6 +7,7 @@ import org.polytech.model.legume.state.StateType;
 public class Tomate extends LegumeModel {
 
     public Tomate() {
+        super();
         this.stateMachine = new StateMachine() {
 
             public State graine() {

@@ -1,5 +1,6 @@
 package org.polytech.vue;
 
+import org.polytech.model.legume.TypeLegume;
 import org.polytech.utils.ExtensionImage;
 import org.polytech.utils.Utils;
 
@@ -15,10 +16,13 @@ public class BottomMenuItem extends JPanel {
 
     private JardinVue parent;
 
+    private TypeLegume typeLegume;
+
     public BottomMenuItem() {
     }
 
-    public BottomMenuItem(String image){
+    public BottomMenuItem(String image, TypeLegume typeLegume){
+        this.typeLegume = typeLegume;
         this.parent=parent;
         this.backgroundImage= Utils.getImageIconFromResources("case", ExtensionImage.PNG).getImage();
 
@@ -33,6 +37,10 @@ public class BottomMenuItem extends JPanel {
         constraints.anchor = GridBagConstraints.CENTER;
 
         this.add(labelImage, constraints);
+    }
+
+    public TypeLegume getTypeLegume() {
+        return typeLegume;
     }
 
     public void resizeImage()
