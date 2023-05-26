@@ -1,13 +1,11 @@
-package test.java;
-
-import model.JoueurModel;
-/*import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;*/
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.polytech.model.JoueurModel;
 
 class JoueurModelTest {
 
-/*    public void cantBuyWhenPlayerDontHaveEnoughSolde() {
+    @Test
+    public void cantBuyWhenPlayerDontHaveEnoughSolde() {
         // Given
         double solde = 1000;
         JoueurModel joueurModel = JoueurModel.createDefault(solde);
@@ -20,7 +18,7 @@ class JoueurModelTest {
         Assertions.assertFalse(hasBought);
     }
 
-
+    @Test
     public void canBuyWhenPlayerHaveSolde() {
         // Given
         double solde = 1000;
@@ -32,5 +30,5 @@ class JoueurModelTest {
         // Then
         Assertions.assertEquals(0, joueurModel.getSolde());
         Assertions.assertTrue(hasBought);
-    }*/
+    }
 }
