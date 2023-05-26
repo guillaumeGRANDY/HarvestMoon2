@@ -47,9 +47,11 @@ public class BarSoleil extends JPanel implements Observer {
     public void actualiseSun(int value)
     {
         this.bar[value].setIcon(sun);
+        this.bar[value].repaint();
 
         if(value<9) {
             this.bar[value + 1].setIcon(noSun);
+            this.bar[value + 1].repaint();
         }
         this.repaint();
     }

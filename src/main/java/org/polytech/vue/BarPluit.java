@@ -47,11 +47,12 @@ public class BarPluit extends JPanel implements Observer {
     public void actualiseRain(int value)
     {
         this.bar[value].setIcon(rain);
+        this.bar[value].repaint();
 
         if(value<9) {
             this.bar[value + 1].setIcon(noRain);
+            this.bar[value+1].repaint();
         }
-        this.repaint();
     }
 
     @Override
