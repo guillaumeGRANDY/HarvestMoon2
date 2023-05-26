@@ -1,12 +1,15 @@
 package org.polytech.vue;
 
+import org.polytech.model.legume.Meteo;
 import org.polytech.utils.ExtensionImage;
 import org.polytech.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Observable;
+import java.util.Observer;
 
-public class BarSoleil extends JPanel {
+public class BarSoleil extends JPanel implements Observer {
 
     JLabel bar[];
     ImageIcon sun;
@@ -45,5 +48,13 @@ public class BarSoleil extends JPanel {
             }
         }
         this.repaint();
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if(o instanceof Meteo m)
+        {
+            actualiseSun(m.getSoleil());
+        }
     }
 }
