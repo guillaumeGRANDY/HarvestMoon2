@@ -5,30 +5,28 @@ import org.polytech.model.JoueurModel;
 class JoueurModelTest {
 
     @Test
-    public void cantBuyWhenPlayerDontHaveEnoughSolde() {
+    public void cantBuyWhenPlayerDontHaveEnoughSolde() throws Exception {
         // Given
         double solde = 1000;
-        JoueurModel joueurModel = JoueurModel.createDefault(solde);
+        JoueurModel joueurModel =new JoueurModel(solde);
 
         // When
-        boolean hasBought = joueurModel.buy(2000);
+        joueurModel.buy(2000);
 
         // Then
         Assertions.assertEquals(solde, joueurModel.getSolde());
-        Assertions.assertFalse(hasBought);
     }
 
     @Test
-    public void canBuyWhenPlayerHaveSolde() {
+    public void canBuyWhenPlayerHaveSolde() throws Exception {
         // Given
         double solde = 1000;
-        JoueurModel joueurModel = JoueurModel.createDefault(solde);
+        JoueurModel joueurModel = new JoueurModel(solde);
 
         // When
-        boolean hasBought = joueurModel.buy(1000);
+        joueurModel.buy(1000);
 
         // Then
         Assertions.assertEquals(0, joueurModel.getSolde());
-        Assertions.assertTrue(hasBought);
     }
 }

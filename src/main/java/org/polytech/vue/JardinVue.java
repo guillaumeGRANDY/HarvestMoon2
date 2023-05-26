@@ -1,6 +1,7 @@
 package org.polytech.vue;
 
 import org.polytech.model.JardinModel;
+import org.polytech.model.JoueurModel;
 import org.polytech.model.Ordonnanceur;
 
 import javax.swing.*;
@@ -13,10 +14,18 @@ import java.io.IOException;
 
 public class JardinVue extends JFrame {
     private final JardinModel jardinModel;
+    private final JoueurModel joueurModel;
+
+    public JoueurModel getJoueurModel() {
+        return joueurModel;
+    }
+
+    private BottomMenu menuDown;
 
     public JardinVue(JardinModel model) {
         super();
         this.jardinModel = model;
+        this.joueurModel = new JoueurModel(1000);
 
         this.addComponentListener(new ComponentAdapter() {
             @Override
@@ -28,8 +37,11 @@ public class JardinVue extends JFrame {
         initialize();
     }
 
-    public void initialize() {
+    public BottomMenu getMenuDown() {
+        return menuDown;
+    }
 
+    public void initialize() {
         //fenetre
         this.setSize(800, 600);
         this.setTitle("HarvestMoon2");
@@ -78,7 +90,7 @@ public class JardinVue extends JFrame {
         bandeauSup.add(lblMeteo);
 
         //Label pour l'argent
-        JLabel lblArgent = new JLabel("Argent: Inconnu");
+        JLabel lblArgent=new JLabel("Argent: " + this.joueurModel.getSolde() + "€");
         lblArgent.setHorizontalAlignment(JLabel.CENTER);
         lblArgent.setFont(new Font("Arial", Font.PLAIN, 35));
         lblArgent.setForeground(Color.WHITE);
@@ -134,7 +146,7 @@ public class JardinVue extends JFrame {
         menuLateral.add(buttonRecolte);
 
         //créer le menu inférieur
-        BottomMenu menuDown = new BottomMenu();
+        menuDown = new BottomMenu();
 
         constraints.gridx = 0;
         constraints.gridy = 2;
@@ -146,7 +158,13 @@ public class JardinVue extends JFrame {
 
 
         this.jardinModel.getMeteo().addObserver(menuDown.getBarSoleil());
+        this.joueurModel.addObserver(menuDown.getExpBar());
+        initArgentLabel();
         setVisible(true);
         Ordonnanceur.getInstance().start();
+    }
+
+    private void initArgentLabel() {
+        this.menuDown.getExpBar().updateArgentLabel(String.valueOf(this.joueurModel.getSolde()));
     }
 }
