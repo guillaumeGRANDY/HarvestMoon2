@@ -66,6 +66,12 @@ public class BottomMenu extends JPanel implements MouseListener {
             BottomMenuItem legumeButton = new BottomMenuItem(typeLegume);
             legumeButton.addMouseListener(this);
             casePanel.add(legumeButton);
+
+            if(typeLegume.getName()=="cactus")
+            {
+                selectedBottomItem=legumeButton;
+                legumeButton.setBackgroundImage("caseSelectionne");
+            }
         }
     }
 
