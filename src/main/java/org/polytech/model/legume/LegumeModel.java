@@ -7,7 +7,7 @@ import org.polytech.model.legume.state.StateType;
 
 import java.util.Observable;
 
-public abstract class LegumeModel extends Observable implements Runnable {
+public abstract class LegumeModel extends Observable {
     protected StateMachine stateMachine;
 
     public abstract TypeLegume getType();
@@ -19,15 +19,15 @@ public abstract class LegumeModel extends Observable implements Runnable {
     }
 
     /**
-     * Gère le cycle de vie du légume (graine, bourgon, fleurie, mature)
-     * Notifie les observateurs lors d'un changement d'état
+     * Fait croître le légume d'un certain nombre de score
+     * @param score le score de croissance à ajouter au légume
      */
-    public void run() {
+    public void croissance(long score) {
         if(this.stateMachine.currentState().stateType().equals(StateType.GRAINE)) {
             setChanged();
             notifyObservers();
         }
-        this.stateMachine.currentState().decrementerTempsRestant();
+        this.stateMachine.currentState().incrementScore(score);
         State oldState = this.stateMachine.currentState();
         this.stateMachine.nextState();
         System.out.println(this.stateMachine.currentState().stateType());

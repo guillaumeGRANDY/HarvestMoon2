@@ -46,7 +46,7 @@ public class CaseVue extends JPanel implements Observer, MouseListener {
                 resizeImage();
             }
         });
-
+        Ordonnanceur.getInstance().addRunnable(caseModel);
     }
 
     public void changeImage(String stage)
@@ -70,7 +70,6 @@ public class CaseVue extends JPanel implements Observer, MouseListener {
         changeImage("stage1");
         caseModel.plant(tomate);
         tomate.addObserver(CaseVue.this);
-        Ordonnanceur.getInstance().addRunnable(tomate);
     }
 
     @Override

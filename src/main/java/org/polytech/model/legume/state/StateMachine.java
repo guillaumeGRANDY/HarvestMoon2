@@ -16,7 +16,7 @@ public abstract class StateMachine {
     }
 
     public void nextState() {
-        if(currentState.getTempsAvantTransition() <= 0) {
+        if(currentState.getStadeCroissance() >= currentState().getSeuilCroissance()) {
             setCurrentState(currentState.nextState());
         }
     }
