@@ -1,6 +1,6 @@
 package org.polytech.vue;
 
-import org.polytech.model.legume.TypeLegume;
+import org.polytech.model.legume.type.TypeLegume;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,9 +18,6 @@ public class BottomMenu extends JPanel implements MouseListener {
     public BottomMenuItem getSelectedBottomItem() {
         return selectedBottomItem;
     }
-
-    private BottomMenuItem buttonCactus;
-    private BottomMenuItem buttonFleurViolet;
 
     private BarSoleil barSoleil;
     private BarPluit barPluit;
@@ -65,37 +62,11 @@ public class BottomMenu extends JPanel implements MouseListener {
         constraints.gridwidth = 1;
         this.add(casePanel,constraints);
 
-        buttonCactus=new BottomMenuItem("cactus", TypeLegume.TOMATE);
-        buttonCactus.addMouseListener(this);
-        casePanel.add(buttonCactus);
-
-        buttonFleurViolet=new BottomMenuItem("fleurViolet", TypeLegume.TOMATE);
-        buttonFleurViolet.addMouseListener(this);
-        casePanel.add(buttonFleurViolet);
-
-        BottomMenuItem buttonFleurOrange=new BottomMenuItem("fleurOrange", TypeLegume.TOMATE);
-        buttonFleurOrange.addMouseListener(this);
-        casePanel.add(buttonFleurOrange);
-
-        BottomMenuItem buttonFleurBleu=new BottomMenuItem("fleurBleu", TypeLegume.TOMATE);
-        buttonFleurBleu.addMouseListener(this);
-        casePanel.add(buttonFleurBleu);
-
-        BottomMenuItem buttonFleurRouge=new BottomMenuItem("fleurRouge", TypeLegume.TOMATE);
-        buttonFleurRouge.addMouseListener(this);
-        casePanel.add(buttonFleurRouge);
-
-        BottomMenuItem buttonFleurJaune=new BottomMenuItem("fleurJaune", TypeLegume.TOMATE);
-        buttonFleurJaune.addMouseListener(this);
-        casePanel.add(buttonFleurJaune);
-
-        BottomMenuItem buttonChampignonMarron=new BottomMenuItem("champignonMarron", TypeLegume.TOMATE);
-        buttonChampignonMarron.addMouseListener(this);
-        casePanel.add(buttonChampignonMarron);
-
-        BottomMenuItem buttonChampignonRouge=new BottomMenuItem("champignonRouge", TypeLegume.TOMATE);
-        buttonChampignonRouge.addMouseListener(this);
-        casePanel.add(buttonChampignonRouge);
+        for (TypeLegume typeLegume : TypeLegume.values()) {
+            BottomMenuItem legumeButton = new BottomMenuItem(typeLegume);
+            legumeButton.addMouseListener(this);
+            casePanel.add(legumeButton);
+        }
     }
 
     public BarSoleil getBarSoleil() {

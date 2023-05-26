@@ -1,7 +1,7 @@
 package org.polytech.model;
 
 import org.polytech.model.legume.LegumeModel;
-import org.polytech.model.legume.TypeLegume;
+import org.polytech.model.legume.type.TypeLegume;
 
 import java.util.ArrayList;
 import java.util.HashMap;

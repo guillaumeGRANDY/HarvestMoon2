@@ -5,7 +5,7 @@ import org.polytech.model.CaseModel;
 import org.polytech.model.Ordonnanceur;
 import org.polytech.model.legume.LegumeFabrique;
 import org.polytech.model.legume.LegumeModel;
-import org.polytech.model.legume.TypeLegume;
+import org.polytech.model.legume.type.TypeLegume;
 import org.polytech.utils.ExtensionImage;
 import org.polytech.utils.Utils;
 
@@ -120,7 +120,7 @@ public class CaseVue extends JPanel implements Observer, MouseListener {
                 case GRAINE -> changeImage("stage1");
                 case BOURGON -> changeImage("stage2");
                 case FLEURIE -> changeImage("stage3");
-                case MATURE -> changeImage(legumeModel.getType().getName());
+                case MATURE -> changeImage("stage4" + legumeModel.getType().getImageName());
             }
             this.repaint();
         }
