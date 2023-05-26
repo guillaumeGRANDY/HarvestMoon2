@@ -7,11 +7,15 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 
-public class BottomMenu extends JPanel implements MouseListener {
-    BottomMenuItem SelectedBotton;
+import static java.awt.GridBagConstraints.LINE_START;
 
-    BottomMenuItem buttonCactus;
-    BottomMenuItem buttonFleurViolet;
+public class BottomMenu extends JPanel implements MouseListener {
+    private BottomMenuItem SelectedBotton;
+
+    private BottomMenuItem buttonCactus;
+    private BottomMenuItem buttonFleurViolet;
+
+    private BarSoleil barSoleil;
 
     public BottomMenu() {
 
@@ -24,11 +28,18 @@ public class BottomMenu extends JPanel implements MouseListener {
         GridBagConstraints constraints = new GridBagConstraints();
         this.setLayout(bottomMenLayout);
 
+        barSoleil=new BarSoleil();
+        constraints.gridx = 0; // To make sure it starts at the left
+        constraints.gridy = 0; // To put it at the top
+        constraints.gridwidth = 1;
+        constraints.anchor=LINE_START;
+        this.add(barSoleil,constraints);
+
         ExpBar expBar=new ExpBar();
         expBar.setPreferredSize(new Dimension(800, 15));
         expBar.setBackground(new java.awt.Color(0, 0, 0, 0));
         constraints.gridx = 0; // To make sure it starts at the left
-        constraints.gridy = 0; // To put it at the top
+        constraints.gridy = 1; // To put it at the top
         constraints.gridwidth = 1;
         constraints.fill = GridBagConstraints.HORIZONTAL;
         this.add(expBar,constraints);
@@ -38,7 +49,7 @@ public class BottomMenu extends JPanel implements MouseListener {
         casePanel.setLayout(caseLayout);
 
         constraints.gridx = 0; // To make sure it starts at the left
-        constraints.gridy = 1; // To put it at the top
+        constraints.gridy = 2; // To put it at the top
         constraints.gridwidth = 1;
         this.add(casePanel,constraints);
 
@@ -73,6 +84,10 @@ public class BottomMenu extends JPanel implements MouseListener {
         BottomMenuItem buttonChampignonRouge=new BottomMenuItem("champignonRouge");
         buttonChampignonRouge.addMouseListener(this);
         casePanel.add(buttonChampignonRouge);
+    }
+
+    public BarSoleil getBarSoleil() {
+        return barSoleil;
     }
 
     @Override
@@ -110,4 +125,5 @@ public class BottomMenu extends JPanel implements MouseListener {
     public void mouseExited(MouseEvent e) {
 
     }
+
 }

@@ -25,10 +25,10 @@ public class CaseVue extends JPanel implements Observer, MouseListener {
     private JardinVue parent;
 
     public CaseVue() {
-        ImageIcon imageIcon = Utils.getImageFromResources("vide", ExtensionImage.PNG);
+        ImageIcon imageIcon = Utils.getImageIconFromResources("vide", ExtensionImage.PNG);
         image = imageIcon.getImage();
         this.add(labelImage,BorderLayout.CENTER);
-        image = Utils.getImageFromResources("vide", ExtensionImage.PNG).getImage();
+        image = Utils.getImageIconFromResources("vide", ExtensionImage.PNG).getImage();
         ImageIcon icon = new ImageIcon(image.getScaledInstance(100, 100, Image.SCALE_DEFAULT));
         labelImage.setIcon(icon);
         this.addMouseListener(this);
@@ -51,7 +51,7 @@ public class CaseVue extends JPanel implements Observer, MouseListener {
 
     public void changeImage(String stage)
     {
-        image = Utils.getImageFromResources(stage, ExtensionImage.PNG).getImage();
+        image = Utils.getImageIconFromResources(stage, ExtensionImage.PNG).getImage();
         resizeImage();
     }
 

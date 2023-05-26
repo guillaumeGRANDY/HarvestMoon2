@@ -7,6 +7,8 @@ public class Ordonnanceur {
     private final List<Runnable> runnables;
     private static Ordonnanceur instance;
 
+    private Runnable meteoRunnable;
+
     public Ordonnanceur() {
         this.runnables = new ArrayList<>();
     }
@@ -46,6 +48,10 @@ public class Ordonnanceur {
     }
 
     public void addRunnable(Runnable legumeModel) {
+        this.runnables.add(legumeModel);
+    }
+
+    public void addMeteo(Runnable legumeModel) {
         this.runnables.add(legumeModel);
     }
 }

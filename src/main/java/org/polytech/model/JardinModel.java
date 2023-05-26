@@ -1,10 +1,14 @@
 package org.polytech.model;
 
+import org.polytech.model.legume.Meteo;
+
 import java.util.Observable;
 
 public class JardinModel extends Observable {
     private final CaseModel[][] plants;
     private final int rows;
+
+    private Meteo meteo=new Meteo();
 
     public int getRows() {
         return rows;
@@ -19,12 +23,13 @@ public class JardinModel extends Observable {
     private final int timesUntilUpdate = 1000;
 
     public JardinModel(int rows, int cols) {
+        Ordonnanceur.getInstance().addMeteo(meteo);
         plants = new CaseModel[rows][cols];
         this.rows = rows;
         this.cols = cols;
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                plants[i][j] = new CaseModel();
+                plants[i][j] = new CaseModel(this);
             }
         }
         changePlants();
@@ -73,5 +78,9 @@ public class JardinModel extends Observable {
 
         Thread thread = new Thread(runnable);
         thread.start();
+    }
+
+    public Meteo getMeteo() {
+        return meteo;
     }
 }

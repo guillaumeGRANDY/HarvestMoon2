@@ -20,9 +20,9 @@ public class BottomMenuItem extends JPanel {
 
     public BottomMenuItem(String image){
         this.parent=parent;
-        this.backgroundImage= Utils.getImageFromResources("case", ExtensionImage.PNG).getImage();
+        this.backgroundImage= Utils.getImageIconFromResources("case", ExtensionImage.PNG).getImage();
 
-        this.image = Utils.getImageFromResources(image, ExtensionImage.PNG).getImage();
+        this.image = Utils.getImageIconFromResources(image, ExtensionImage.PNG).getImage();
         ImageIcon icon = new ImageIcon(this.image.getScaledInstance(70, 70, Image.SCALE_DEFAULT));
         labelImage=new JLabel(icon);
 
@@ -51,7 +51,7 @@ public class BottomMenuItem extends JPanel {
     }
 
     public void setBackgroundImage(String image) {
-        this.backgroundImage = Utils.getImageFromResources(image, ExtensionImage.PNG).getImage();
+        this.backgroundImage = Utils.getImageIconFromResources(image, ExtensionImage.PNG).getImage();
         this.repaint();
     }
 }

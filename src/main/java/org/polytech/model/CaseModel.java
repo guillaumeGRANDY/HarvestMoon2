@@ -8,6 +8,12 @@ import java.util.Observable;
 public class CaseModel extends Observable implements Runnable {
     private LegumeModel legumeModel = null;
 
+    private JardinModel parent;
+
+    public CaseModel(JardinModel parent) {
+        this.parent = parent;
+    }
+
     /**
      * Savoir si la case a un légume planté
      * @return true si la case a un légume planté
@@ -38,7 +44,7 @@ public class CaseModel extends Observable implements Runnable {
     @Override
     public void run() {
         if(isPlanted()) {
-            legumeModel.croissance(10);
+            legumeModel.croissance(10+parent.getMeteo().getPluit()*parent.getMeteo().getSoleil());
             setChanged();
             notifyObservers();
         }

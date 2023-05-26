@@ -14,7 +14,7 @@ public class ExpBar extends JPanel{
 
     public ExpBar()
     {
-        backgroundImage= Utils.getImageFromResources("barExp", ExtensionImage.PNG);
+        backgroundImage= Utils.getImageIconFromResources("barExp", ExtensionImage.PNG);
         //Label de l'argent
         JLabel lblArgent = new JLabel("XXXX");
         lblArgent.setHorizontalAlignment(JLabel.LEFT);
