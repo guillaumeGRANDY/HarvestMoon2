@@ -8,6 +8,9 @@ import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
+import java.io.File;
+import java.io.IOException;
+
 public class JardinVue extends JFrame {
     private final JardinModel jardinModel;
 
@@ -44,7 +47,7 @@ public class JardinVue extends JFrame {
         //créer le bandeau supérieur
         JPanel bandeauSup = new JPanel();
         bandeauSup.setBackground(new java.awt.Color(0, 0, 0, 0));
-        bandeauSup.setLayout(new GridLayout(1, 2));
+        bandeauSup.setLayout(new GridLayout(2, 1));
         bandeauSup.setPreferredSize(new Dimension(800, 200));
 
         constraints.weightx = 1.0;
@@ -55,28 +58,51 @@ public class JardinVue extends JFrame {
         constraints.gridwidth = 3; // To make it extend across all columns
         background.add(bandeauSup, constraints);
 
+
         //Label de la date
-        JLabel lblDate = new JLabel("Date Inconnu");
-        lblDate.setHorizontalAlignment(JLabel.CENTER);
+        JLabel lblDate = new JLabel("Date Inconnue");
+        lblDate.setHorizontalAlignment(JLabel.LEFT);
         lblDate.setFont(new Font("Arial", Font.PLAIN, 35));
+        lblDate.setBackground(new java.awt.Color(0, 0, 0, 0.3F));
         lblDate.setForeground(Color.WHITE);
+        lblDate.setOpaque(true);
         bandeauSup.add(lblDate);
+
+        //Label de la soleil
+        JLabel lblMeteo = new JLabel("Meteo");
+        lblMeteo.setHorizontalAlignment(JLabel.LEFT);
+        lblMeteo.setFont(new Font("Arial", Font.PLAIN, 35));
+        lblMeteo.setBackground(new java.awt.Color(0, 0, 0, 0.3F));
+        lblMeteo.setForeground(Color.WHITE);
+        lblMeteo.setOpaque(true);
+        bandeauSup.add(lblMeteo);
 
         //Label pour l'argent
         JLabel lblArgent = new JLabel("Argent: Inconnu");
         lblArgent.setHorizontalAlignment(JLabel.CENTER);
         lblArgent.setFont(new Font("Arial", Font.PLAIN, 35));
         lblArgent.setForeground(Color.WHITE);
-        bandeauSup.add(lblArgent, BorderLayout.EAST);
+        //bandeauSup.add(lblArgent, BorderLayout.EAST);
+
+        try {
+            Font minecraftFont = Font.createFont(Font.TRUETYPE_FONT, new File("./src/font/Minecraft.otf"));
+            lblDate.setFont(minecraftFont.deriveFont(Font.PLAIN, 35));
+            lblMeteo.setFont(minecraftFont.deriveFont(Font.PLAIN, 35));
+            lblArgent.setFont(minecraftFont.deriveFont(Font.PLAIN, 35));
+        } catch (FontFormatException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         //créer le jardin
         JPanel zoneJardin = new JPanel();
         zoneJardin.setBackground(new java.awt.Color(0, 0, 0, 0));
-        GridLayout jardinLayout = new GridLayout(4, 6, 10, 10);
+        GridLayout jardinLayout = new GridLayout(5, 8, 10, 10);
         zoneJardin.setLayout(jardinLayout);
 
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 6; j++) {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 8; j++) {
                 CaseVue uneCase = new CaseVue(jardinModel.getCase(i, j),this);
                 uneCase.setBackground(new java.awt.Color(0, 0, 0, 0));
                 zoneJardin.add(uneCase); // add à la grid
@@ -115,7 +141,7 @@ public class JardinVue extends JFrame {
         constraints.gridwidth = 3;
         constraints.weightx = 1.0;
         constraints.weighty = 0.1; // Réduire le poids pour allouer moins d'espace
-        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.fill = GridBagConstraints.CENTER;
         background.add(menuDown, constraints);
 
         setVisible(true);

@@ -57,7 +57,7 @@ public class CaseVue extends JPanel implements Observer, MouseListener {
 
     public void resizeImage()
     {
-        int dimension=Math.min(getWidth(),getHeight());
+        int dimension= Math.min(getWidth(),getHeight());
         ImageIcon icon = new ImageIcon( image.getScaledInstance(dimension, dimension, Image.SCALE_DEFAULT));
         labelImage.setIcon(icon);
         parent.repaint();
