@@ -5,13 +5,17 @@ import java.util.Observable;
 
 public class Meteo extends Observable implements Runnable{
 
-    int pluit,soleil;
+    int pluit=5,soleil=5;
     Random random = new Random();
 
     @Override
     public void run() {
-        this.soleil=random.nextInt(11);
-        this.pluit=random.nextInt(11);
+        int value=random.nextInt(3)-1;
+        this.soleil+=value;
+        this.soleil=Math.max(Math.min(this.soleil,9),0);
+        value=random.nextInt(3)-1;
+        this.pluit+=value;
+        this.pluit=Math.max(Math.min(this.pluit,9),0);
         this.setChanged();
         this.notifyObservers();
     }
