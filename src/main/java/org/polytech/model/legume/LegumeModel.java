@@ -4,6 +4,7 @@ package org.polytech.model.legume;
 import org.polytech.model.legume.state.State;
 import org.polytech.model.legume.state.StateMachine;
 import org.polytech.model.legume.state.StateType;
+import org.polytech.model.legume.type.TypeLegume;
 
 import java.util.HashMap;
 import java.util.Observable;

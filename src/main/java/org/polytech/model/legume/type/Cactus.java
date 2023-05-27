@@ -1,15 +1,15 @@
-package org.polytech.model.legume;
+package org.polytech.model.legume.type;
 
+import org.polytech.model.legume.LegumeModel;
 import org.polytech.model.legume.state.State;
 import org.polytech.model.legume.state.StateMachine;
 import org.polytech.model.legume.state.StateType;
 
-public class Tomate extends LegumeModel {
+public class Cactus extends LegumeModel {
 
-    public Tomate() {
+    public Cactus() {
         super();
         this.stateMachine = new StateMachine() {
-
             public State graine() {
                 return new State(250) {
                     public State nextState() {
@@ -68,11 +68,11 @@ public class Tomate extends LegumeModel {
 
     @Override
     public TypeLegume getType() {
-        return TypeLegume.TOMATE;
+        return TypeLegume.CACTUS;
     }
 
     @Override
     public double getPrice() {
-        return 100;
+        return 10;
     }
 }

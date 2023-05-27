@@ -1,6 +1,6 @@
 package org.polytech.vue;
 
-import org.polytech.model.legume.TypeLegume;
+import org.polytech.model.legume.type.TypeLegume;
 import org.polytech.utils.ExtensionImage;
 import org.polytech.utils.Utils;
 
@@ -21,12 +21,12 @@ public class BottomMenuItem extends JPanel {
     public BottomMenuItem() {
     }
 
-    public BottomMenuItem(String image, TypeLegume typeLegume){
+    public BottomMenuItem(TypeLegume typeLegume){
         this.typeLegume = typeLegume;
         this.parent=parent;
         this.backgroundImage= Utils.getImageIconFromResources("case", ExtensionImage.PNG).getImage();
 
-        this.image = Utils.getImageIconFromResources(image, ExtensionImage.PNG).getImage();
+        this.image = Utils.getImageIconFromResources(typeLegume.getImageName(), ExtensionImage.PNG).getImage();
         ImageIcon icon = new ImageIcon(this.image.getScaledInstance(70, 70, Image.SCALE_DEFAULT));
         labelImage=new JLabel(icon);
 
