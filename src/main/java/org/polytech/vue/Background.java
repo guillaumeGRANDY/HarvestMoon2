@@ -10,7 +10,7 @@ public class Background extends JPanel {
     private Image image;
 
     public Background() {
-        this.image = Utils.getImageIconFromResources("fondTest2", ExtensionImage.PNG).getImage();
+        this.image = Utils.getImageIconFromResources("jour", ExtensionImage.PNG).getImage();
         this.setOpaque(false);
     }
 
