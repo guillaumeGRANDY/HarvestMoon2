@@ -156,9 +156,9 @@ public class JardinVue extends JFrame {
         constraints.fill = GridBagConstraints.CENTER;
         background.add(menuDown, constraints);
 
-
         this.jardinModel.getMeteo().addObserver(menuDown.getBarSoleil());
         this.jardinModel.getMeteo().addObserver(menuDown.getBarPluit());
+        this.jardinModel.getMeteo().addObserver(background);
         this.joueurModel.addObserver(menuDown.getExpBar());
         initArgentLabel();
 
