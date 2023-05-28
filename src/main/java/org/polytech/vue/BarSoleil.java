@@ -29,8 +29,8 @@ public class BarSoleil extends JPanel implements Observer {
 
         this.setBackground(new java.awt.Color(0, 0, 0, 0));
 
-        sun= new ImageIcon(Utils.getImageFromResources("sun", ExtensionImage.PNG).getScaledInstance(20, 20, Image.SCALE_DEFAULT));
-        noSun= new ImageIcon(Utils.getImageFromResources("noSun", ExtensionImage.PNG).getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+        sun= new ImageIcon(Utils.getImageFromResources("sun", ExtensionImage.PNG).getScaledInstance(25, 25, Image.SCALE_DEFAULT));
+        noSun= new ImageIcon(Utils.getImageFromResources("noSun", ExtensionImage.PNG).getScaledInstance(25, 25, Image.SCALE_DEFAULT));
 
         for(int i=0;i<10;i++)
         {

@@ -1,16 +1,21 @@
 package org.polytech.vue;
 
-import org.polytech.model.legume.type.TypeLegume;
+import org.polytech.model.JoueurModel;
+import org.polytech.model.legume.Meteo;
+import org.polytech.model.legume.TypeLegume;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
+import java.util.Observable;
+import java.util.Observer;
 
-import static java.awt.GridBagConstraints.LINE_END;
-import static java.awt.GridBagConstraints.LINE_START;
+import static java.awt.GridBagConstraints.*;
 
-public class BottomMenu extends JPanel implements MouseListener {
+public class BottomMenu extends JPanel implements MouseListener, Observer {
     private final ExpBar expBar;
 
     private BottomMenuItem selectedBottomItem;
@@ -21,6 +26,7 @@ public class BottomMenu extends JPanel implements MouseListener {
 
     private BarSoleil barSoleil;
     private BarPluit barPluit;
+    private JLabel hourLabel;
 
     public BottomMenu() {
 
@@ -39,6 +45,24 @@ public class BottomMenu extends JPanel implements MouseListener {
         constraints.gridwidth = 1;
         constraints.anchor=LINE_START;
         this.add(barSoleil,constraints);
+
+        this.hourLabel = new JLabel("11:00");
+        hourLabel.setHorizontalAlignment(JLabel.CENTER);
+        hourLabel.setFont(new Font("Arial", Font.PLAIN,20 ));
+        hourLabel.setForeground(Color.white);
+        hourLabel.setOpaque(false);
+        constraints.anchor=CENTER;
+        this.add(hourLabel,constraints);
+
+
+        try {
+            Font minecraftFont = Font.createFont(Font.TRUETYPE_FONT, new File("./src/font/Minecraft.otf"));
+            hourLabel.setFont(minecraftFont.deriveFont(Font.PLAIN, 40));
+        } catch (FontFormatException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         barPluit=new BarPluit();
         constraints.anchor=LINE_END;
@@ -122,4 +146,11 @@ public class BottomMenu extends JPanel implements MouseListener {
 
     }
 
+    @Override
+    public void update(Observable o, Object arg) {
+        if(o instanceof Meteo m)
+        {
+            this.hourLabel.setText(m.getHeure()+":00");
+        }
+    }
 }
