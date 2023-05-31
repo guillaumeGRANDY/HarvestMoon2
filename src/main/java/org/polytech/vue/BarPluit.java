@@ -29,8 +29,8 @@ public class BarPluit extends JPanel implements Observer {
 
         this.setBackground(new Color(0, 0, 0, 0));
 
-        rain= new ImageIcon(Utils.getImageFromResources("rain", ExtensionImage.PNG).getScaledInstance(20, 20, Image.SCALE_DEFAULT));
-        noRain= new ImageIcon(Utils.getImageFromResources("noRain", ExtensionImage.PNG).getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+        rain= new ImageIcon(Utils.getImageFromResources("rain", ExtensionImage.PNG).getScaledInstance(25, 25, Image.SCALE_DEFAULT));
+        noRain= new ImageIcon(Utils.getImageFromResources("noRain", ExtensionImage.PNG).getScaledInstance(25, 25, Image.SCALE_DEFAULT));
 
         for(int i=0;i<10;i++)
         {
@@ -47,11 +47,12 @@ public class BarPluit extends JPanel implements Observer {
     public void actualiseRain(int value)
     {
         this.bar[value].setIcon(rain);
+        this.bar[value].repaint();
 
         if(value<9) {
             this.bar[value + 1].setIcon(noRain);
+            this.bar[value+1].repaint();
         }
-        this.repaint();
     }
 
     @Override

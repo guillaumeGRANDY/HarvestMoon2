@@ -140,11 +140,6 @@ public class JardinVue extends JFrame {
         constraints.weighty = 1.0; // To allocate more space to this component
         background.add(menuLateral, constraints);
 
-        JButton buttonRecolte = new JButton("Récolter");
-        buttonRecolte.setBackground(new java.awt.Color(46, 171, 0));
-        buttonRecolte.setForeground(Color.white);
-        menuLateral.add(buttonRecolte);
-
         //créer le menu inférieur
         menuDown = new BottomMenu();
 
@@ -156,9 +151,10 @@ public class JardinVue extends JFrame {
         constraints.fill = GridBagConstraints.CENTER;
         background.add(menuDown, constraints);
 
-
         this.jardinModel.getMeteo().addObserver(menuDown.getBarSoleil());
         this.jardinModel.getMeteo().addObserver(menuDown.getBarPluit());
+        this.jardinModel.getMeteo().addObserver(background);
+        this.jardinModel.getMeteo().addObserver(menuDown);
         this.joueurModel.addObserver(menuDown.getExpBar());
         initArgentLabel();
 

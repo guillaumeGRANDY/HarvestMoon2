@@ -29,27 +29,45 @@ public class BarSoleil extends JPanel implements Observer {
 
         this.setBackground(new java.awt.Color(0, 0, 0, 0));
 
-        sun= new ImageIcon(Utils.getImageFromResources("sun", ExtensionImage.PNG).getScaledInstance(20, 20, Image.SCALE_DEFAULT));
-        noSun= new ImageIcon(Utils.getImageFromResources("noSun", ExtensionImage.PNG).getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+        sun= new ImageIcon(Utils.getImageFromResources("sun", ExtensionImage.PNG).getScaledInstance(25, 25, Image.SCALE_DEFAULT));
+        noSun= new ImageIcon(Utils.getImageFromResources("noSun", ExtensionImage.PNG).getScaledInstance(25, 25, Image.SCALE_DEFAULT));
 
         for(int i=0;i<10;i++)
         {
-            if(i<5) {
-                this.bar[i].setIcon(sun);
-            }
-            else
-            {
-                this.bar[i].setIcon(noSun);
-            }
+            this.bar[i].setIcon(sun);
         }
     }
 
-    public void actualiseSun(int value)
-    {
-        this.bar[value].setIcon(sun);
+    public void actualiseSun(int value) {
 
-        if(value<9) {
-            this.bar[value + 1].setIcon(noSun);
+        if (value > 0){
+            this.bar[value - 1].setIcon(sun);
+            this.bar[value - 1].repaint();
+
+            if (value > 1) {
+                this.bar[value - 2].setIcon(sun);
+                this.bar[value - 2].repaint();
+
+                if (value > 2) {
+                    this.bar[value - 3].setIcon(sun);
+                    this.bar[value - 3].repaint();
+                }
+            }
+        }
+
+        if(value<10) {
+            this.bar[value].setIcon(noSun);
+            this.bar[value].repaint();
+
+            if(value<9) {
+                this.bar[value + 1].setIcon(noSun);
+                this.bar[value + 1].repaint();
+
+                if(value<8) {
+                    this.bar[value + 2].setIcon(noSun);
+                    this.bar[value + 2].repaint();
+                }
+            }
         }
         this.repaint();
     }
