@@ -1,5 +1,6 @@
 package org.polytech.vue;
 
+import org.polytech.model.legume.type.TypeLegume;
 import org.polytech.utils.ExtensionImage;
 import org.polytech.utils.Utils;
 
@@ -17,43 +18,19 @@ public class RightMenu extends JPanel {
         this.setOpaque(false);
 
         this.setLayout(new GridBagLayout());
-        GridBagConstraints constraints=new GridBagConstraints();
+        this.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
+        GridBagConstraints constraints = new GridBagConstraints();
+        //constraints.insets=new Insets(10,10,10,10);
 
-        JLabel lblInventaire = new JLabel("Mon iventaire");
-        lblInventaire.setHorizontalAlignment(JLabel.LEFT);
-        lblInventaire.setFont(new Font("Arial", Font.PLAIN,50 ));
-        lblInventaire.setForeground(Color.black);
-        lblInventaire.setOpaque(false);
-
-        constraints.gridy=0;
-        constraints.weighty=1;
-        constraints.insets=new Insets(30,30,30,30);
-        constraints.anchor=GridBagConstraints.PAGE_START;
-        this.add(lblInventaire,constraints);
-
-        try {
-            Font minecraftFont = Font.createFont(Font.TRUETYPE_FONT, new File("./src/font/Minecraft.otf"));
-            lblInventaire.setFont(minecraftFont.deriveFont(Font.PLAIN, 50));
-        } catch (FontFormatException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        chestItem=new RightMenuItem[8];
+        int i=0;
+        for (TypeLegume typeLegume : TypeLegume.values()) {
+                constraints.gridx=i%4;
+                constraints.gridy=(int)i/4;
+                chestItem[i] = new RightMenuItem(this,typeLegume);
+                this.add(chestItem[i],constraints);
+                i++;
         }
-
-        JPanel panelInventaire=new JPanel();
-        GridLayout layout=new GridLayout(3,3);
-        panelInventaire.setLayout(layout);
-
-        chestItem=new RightMenuItem[9];
-        for(int i=0;i<9;i++)
-        {
-            chestItem[i]=new RightMenuItem(this);
-            panelInventaire.add(chestItem[i]);
-        }
-
-        constraints.gridy = 1;
-        constraints.weighty=0;
-        this.add(panelInventaire,constraints);
     }
 
     @Override
