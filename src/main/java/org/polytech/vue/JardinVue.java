@@ -67,8 +67,16 @@ public class JardinVue extends JFrame {
         constraints.fill = GridBagConstraints.HORIZONTAL; // To make it fill the horizontal space
         constraints.gridx = 0; // To make sure it starts at the left
         constraints.gridy = 0; // To put it at the top
-        constraints.gridwidth = 2; // To make it extend across all columns
+        constraints.gridwidth = 1; // To make it extend across all columns
         background.add(bandeauSup, constraints);
+
+        SpeedMenu speedMenu=new SpeedMenu();
+        constraints.gridx = 1; // To make sure it starts at the left
+        constraints.gridy = 0; // To put it at the top
+        constraints.weightx = 0.1;
+        constraints.weighty = 0.1; // To allocate space in the vertical direction
+        background.add(speedMenu, constraints);
+
 
 
         //Label de la date
@@ -89,18 +97,10 @@ public class JardinVue extends JFrame {
         lblMeteo.setOpaque(true);
         bandeauSup.add(lblMeteo);
 
-        //Label pour l'argent
-        JLabel lblArgent=new JLabel("Argent: " + this.joueurModel.getSolde() + "€");
-        lblArgent.setHorizontalAlignment(JLabel.CENTER);
-        lblArgent.setFont(new Font("Arial", Font.PLAIN, 35));
-        lblArgent.setForeground(Color.WHITE);
-        //bandeauSup.add(lblArgent, BorderLayout.EAST);
-
         try {
             Font minecraftFont = Font.createFont(Font.TRUETYPE_FONT, new File("./src/font/Minecraft.otf"));
             lblDate.setFont(minecraftFont.deriveFont(Font.PLAIN, 35));
             lblMeteo.setFont(minecraftFont.deriveFont(Font.PLAIN, 35));
-            lblArgent.setFont(minecraftFont.deriveFont(Font.PLAIN, 35));
         } catch (FontFormatException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
