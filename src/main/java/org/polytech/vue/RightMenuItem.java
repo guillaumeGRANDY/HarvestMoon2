@@ -9,8 +9,6 @@ import java.awt.*;
 
 public class RightMenuItem extends JPanel {
     private Image backgroundImage;
-    private RightMenu parent;
-
     private JLabel labelImage;
     private Image image;
     private JLabel nb;
@@ -20,7 +18,6 @@ public class RightMenuItem extends JPanel {
     public RightMenuItem(RightMenu parent, TypeLegume typeLegume) {
         this.backgroundImage = Utils.getImageIconFromResources("caseCoffre", ExtensionImage.PNG).getImage();
         this.setOpaque(false);
-        this.parent=parent;
 
         this.setLayout(new GridBagLayout());
         GridBagConstraints constraints=new GridBagConstraints();
