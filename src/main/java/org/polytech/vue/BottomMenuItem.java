@@ -11,19 +11,12 @@ public class BottomMenuItem extends JPanel {
 
     private Image image;
     private Image backgroundImage;
-
     private JLabel labelImage;
-
-    private JardinVue parent;
 
     private TypeLegume typeLegume;
 
-    public BottomMenuItem() {
-    }
-
     public BottomMenuItem(TypeLegume typeLegume){
         this.typeLegume = typeLegume;
-        this.parent=parent;
         this.backgroundImage= Utils.getImageIconFromResources("case", ExtensionImage.PNG).getImage();
 
         this.image = Utils.getImageIconFromResources(typeLegume.getImageName(), ExtensionImage.PNG).getImage();
@@ -41,15 +34,6 @@ public class BottomMenuItem extends JPanel {
 
     public TypeLegume getTypeLegume() {
         return typeLegume;
-    }
-
-    public void resizeImage()
-    {
-        int dimension=Math.min(getWidth(),getHeight())-100;
-        ImageIcon icon = new ImageIcon(image.getScaledInstance(dimension, dimension, Image.SCALE_DEFAULT));
-        labelImage.setIcon(icon);
-        parent.repaint();
-        labelImage.repaint();
     }
 
     @Override
