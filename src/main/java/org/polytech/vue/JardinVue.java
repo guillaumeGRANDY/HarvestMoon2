@@ -67,7 +67,7 @@ public class JardinVue extends JFrame {
         constraints.fill = GridBagConstraints.HORIZONTAL; // To make it fill the horizontal space
         constraints.gridx = 0; // To make sure it starts at the left
         constraints.gridy = 0; // To put it at the top
-        constraints.gridwidth = 3; // To make it extend across all columns
+        constraints.gridwidth = 2; // To make it extend across all columns
         background.add(bandeauSup, constraints);
 
 
@@ -133,11 +133,11 @@ public class JardinVue extends JFrame {
         RightMenu menuLateral = new RightMenu();
         menuLateral.setBackground(new java.awt.Color(0, 0, 0, 0.5F));
 
-        constraints.gridx = 2;
-        constraints.gridy = 1;
+        constraints.gridx = 1;
+        constraints.gridy = 2;
         constraints.gridwidth = 1;
-        constraints.weightx = 1.0;
-        constraints.weighty = 1.0; // To allocate more space to this component
+        constraints.weightx = 0.1;
+        constraints.weighty = 0.1; // To allocate more space to this component
         background.add(menuLateral, constraints);
 
         //créer le menu inférieur
@@ -145,7 +145,7 @@ public class JardinVue extends JFrame {
 
         constraints.gridx = 0;
         constraints.gridy = 2;
-        constraints.gridwidth = 3;
+        constraints.gridwidth = 1;
         constraints.weightx = 1.0;
         constraints.weighty = 0.1; // Réduire le poids pour allouer moins d'espace
         constraints.fill = GridBagConstraints.CENTER;
