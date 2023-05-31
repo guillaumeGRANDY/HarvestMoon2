@@ -13,15 +13,20 @@ import java.util.Observer;
 public class RightMenuItem extends JPanel implements Observer {
     private final TypeLegume typeLegume;
     private Image backgroundImage;
-    private JLabel labelImage;
-    private Image image;
-    private JLabel nb;
+    private RightMenu parent;
+
+    private JLabel labelImageContainingLegumeImage;
+    private Image imageOfTypeLegume;
+    private JLabel nbTypeLegumeJpanel;
 
 
 
     public RightMenuItem(RightMenu parent, TypeLegume typeLegume) {
         this.backgroundImage = Utils.getImageIconFromResources("caseCoffre", ExtensionImage.PNG).getImage();
         this.setOpaque(false);
+        this.parent=parent;
+        this.parent.getJardinVue().getJoueurModel().getInventory().addObserver(this);
+        this.typeLegume = typeLegume;
 
         this.setLayout(new GridBagLayout());
         GridBagConstraints constraints=new GridBagConstraints();
