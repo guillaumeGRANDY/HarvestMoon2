@@ -1,5 +1,6 @@
 package org.polytech.model;
 
+import org.polytech.model.inventory.Inventory;
 import org.polytech.model.legume.LegumeModel;
 
 import java.util.Observable;
@@ -16,15 +17,15 @@ public class JoueurModel extends Observable {
 
     private Inventory inventory;
 
-    public Inventory getInventory() {
-        return inventory;
-    }
-
     public JoueurModel(double solde) {
         this.solde = solde;
         this.inventory = new Inventory();
         this.setChanged();
         this.notifyObservers();
+    }
+
+    public Inventory getInventory() {
+        return this.inventory;
     }
 
     private boolean canBuy(double price) {
@@ -56,5 +57,9 @@ public class JoueurModel extends Observable {
 
     private void addLegumeToInventory(LegumeModel legume) {
         inventory.addLegume(legume);
+    }
+
+    public void addToInventory(LegumeModel legumeModel) {
+        this.inventory.addLegume(legumeModel);
     }
 }

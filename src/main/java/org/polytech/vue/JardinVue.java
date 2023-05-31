@@ -130,7 +130,7 @@ public class JardinVue extends JFrame {
         background.add(zoneJardin, constraints);
 
         //créer le menu lateral
-        RightMenu menuLateral = new RightMenu();
+        RightMenu menuLateral = new RightMenu(this);
         menuLateral.setBackground(new java.awt.Color(0, 0, 0, 0.5F));
 
         constraints.gridx = 1;

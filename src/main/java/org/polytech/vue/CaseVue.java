@@ -3,6 +3,7 @@ package org.polytech.vue;
 
 import org.polytech.model.CaseModel;
 import org.polytech.model.Ordonnanceur;
+import org.polytech.model.exception.CannotHarvestException;
 import org.polytech.model.legume.LegumeFabrique;
 import org.polytech.model.legume.LegumeModel;
 import org.polytech.model.legume.type.TypeLegume;
@@ -30,10 +31,15 @@ public class CaseVue extends JPanel implements Observer, MouseListener {
         ImageIcon imageIcon = Utils.getImageIconFromResources("vide", ExtensionImage.PNG);
         image = imageIcon.getImage();
         this.add(labelImage,BorderLayout.CENTER);
-        image = Utils.getImageIconFromResources("vide", ExtensionImage.PNG).getImage();
+        setCaseNotPlanted();
         ImageIcon icon = new ImageIcon(image.getScaledInstance(100, 100, Image.SCALE_DEFAULT));
         labelImage.setIcon(icon);
         this.addMouseListener(this);
+    }
+
+    private void setCaseNotPlanted() {
+        image = Utils.getImageIconFromResources("vide", ExtensionImage.PNG).getImage();
+        this.labelImage.setIcon(new ImageIcon(image.getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
     }
 
     public CaseVue(CaseModel caseModel, JardinVue parent) {
@@ -68,7 +74,18 @@ public class CaseVue extends JPanel implements Observer, MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        this.buyAndPlant();
+        if(!this.caseModel.isPlanted()) {
+            this.buyAndPlant();
+        } else {
+            try {
+                LegumeModel legumeModel = this.caseModel.tryHarvest();
+                this.parent.getJoueurModel().addToInventory(legumeModel);
+                this.setCaseNotPlanted();
+                this.resizeImage();
+            } catch (CannotHarvestException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
+        }
     }
 
     private void buyAndPlant() {

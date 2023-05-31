@@ -1,6 +1,7 @@
 package org.polytech.model;
 
 
+import org.polytech.model.exception.CannotHarvestException;
 import org.polytech.model.legume.LegumeModel;
 
 import java.util.Observable;
@@ -48,5 +49,12 @@ public class CaseModel extends Observable implements Runnable {
             setChanged();
             notifyObservers();
         }
+    }
+
+    public LegumeModel tryHarvest() throws CannotHarvestException {
+        if(!this.legumeModel.tryHarvest()) {
+            throw new CannotHarvestException(this.legumeModel);
+        }
+        return this.legumeModel;
     }
 }

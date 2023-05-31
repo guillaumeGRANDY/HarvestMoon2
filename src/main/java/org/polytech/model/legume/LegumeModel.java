@@ -50,7 +50,7 @@ public abstract class LegumeModel extends Observable {
         State oldState = this.stateMachine.currentState();
         this.stateMachine.nextState();
         System.out.println(this.stateMachine.currentState().stateType());
-        if (!this.stateMachine.currentState().equals(oldState)) {
+        if (isPlanted && !this.stateMachine.currentState().equals(oldState)) {
             setChanged();
             notifyObservers();
         }
@@ -58,5 +58,17 @@ public abstract class LegumeModel extends Observable {
 
     public void plant() {
         this.isPlanted = true;
+    }
+
+    public void unPlant() {
+        this.isPlanted = false;
+    }
+
+    public boolean tryHarvest() {
+        if(this.getCurrentState().stateType().equals(StateType.MATURE)) {
+            this.unPlant();
+            return true;
+        }
+        return false;
     }
 }

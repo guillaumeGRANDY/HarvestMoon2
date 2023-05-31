@@ -6,14 +6,15 @@ import org.polytech.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 
 public class RightMenu extends JPanel {
     private Image backgroundImage;
     private RightMenuItem chestItem[];
 
-    public RightMenu() {
+    private JardinVue jardinVue;
+
+    public RightMenu(JardinVue jardinVue) {
+        this.jardinVue = jardinVue;
         this.backgroundImage = Utils.getImageIconFromResources("coffre", ExtensionImage.PNG).getImage();
         this.setOpaque(false);
 
@@ -31,6 +32,10 @@ public class RightMenu extends JPanel {
                 this.add(chestItem[i],constraints);
                 i++;
         }
+    }
+
+    public JardinVue getJardinVue() {
+        return jardinVue;
     }
 
     @Override
