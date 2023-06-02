@@ -3,6 +3,8 @@ package org.polytech.vue;
 import org.polytech.model.JardinModel;
 import org.polytech.model.JoueurModel;
 import org.polytech.model.Ordonnanceur;
+import org.polytech.model.PrixMarche;
+import org.polytech.vue.inventory.InventoryMenu;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -110,7 +112,7 @@ public class JardinVue extends JFrame {
         background.add(zoneJardin, constraints);
 
         //créer le menu lateral
-        RightMenu menuLateral = new RightMenu(this);
+        InventoryMenu menuLateral = new InventoryMenu(this.joueurModel);
         menuLateral.setBackground(new java.awt.Color(0, 0, 0, 0.5F));
 
         constraints.gridx = 1;
@@ -133,7 +135,7 @@ public class JardinVue extends JFrame {
 
         this.jardinModel.getMeteo().addObserver(menuDown.getBarSoleil());
         this.jardinModel.getMeteo().addObserver(menuDown.getBarPluit());
-        this.jardinModel.getPrix().addObserver(topMenu);
+        PrixMarche.getInstance().addObserver(topMenu);
         this.jardinModel.getMeteo().addObserver(background);
         this.jardinModel.getMeteo().addObserver(menuDown);
         this.joueurModel.addObserver(menuDown.getExpBar());

@@ -6,7 +6,7 @@ public class JardinModel extends Observable {
     private final CaseModel[][] plants;
     private final int rows;
 
-    private PrixMarche prix=new PrixMarche();;
+    private final PrixMarche prix = PrixMarche.getInstance();
 
     private Meteo meteo=new Meteo();
 
@@ -24,7 +24,7 @@ public class JardinModel extends Observable {
 
     public JardinModel(int rows, int cols) {
         Ordonnanceur.getInstance().addRunnable(meteo);
-        Ordonnanceur.getInstance().addRunnable(prix);
+        Ordonnanceur.getInstance().addRunnable(PrixMarche.getInstance());
         plants = new CaseModel[rows][cols];
         this.rows = rows;
         this.cols = cols;

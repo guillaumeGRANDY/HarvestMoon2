@@ -10,7 +10,10 @@ import java.util.Random;
 
 public class PrixMarche extends Observable implements Runnable {
     PrixPlante[] prixLegume;
-    public PrixMarche() {
+
+    private static PrixMarche instance = null;
+
+    private PrixMarche() {
         prixLegume=new PrixPlante[8];
 
         prixLegume[0]=new PrixPlante(TypeLegume.CACTUS, 50);
@@ -21,6 +24,13 @@ public class PrixMarche extends Observable implements Runnable {
         prixLegume[5]=new PrixPlante(TypeLegume.FLEUR_JAUNE,1000);
         prixLegume[6]=new PrixPlante(TypeLegume.CHAMPIGNON_MARRON,250);
         prixLegume[7]=new PrixPlante(TypeLegume.CHAMPIGNON_ROUGE,300);
+    }
+
+    public static PrixMarche getInstance() {
+        if(instance == null) {
+            instance = new PrixMarche();
+        }
+        return instance;
     }
 
     public int getPrice(TypeLegume typeLegume)
