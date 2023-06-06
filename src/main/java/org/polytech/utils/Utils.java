@@ -1,5 +1,6 @@
 package org.polytech.utils;
 
+import javax.print.attribute.standard.Media;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;

@@ -1,6 +1,6 @@
 package org.polytech.vue;
 
-import org.polytech.model.legume.Meteo;
+import org.polytech.model.Meteo;
 import org.polytech.utils.ExtensionImage;
 import org.polytech.utils.Utils;
 

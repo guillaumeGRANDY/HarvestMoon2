@@ -1,7 +1,7 @@
 package org.polytech.vue;
 
-import org.polytech.model.JoueurModel;
-import org.polytech.model.legume.Meteo;
+import org.polytech.model.Meteo;
+import org.polytech.model.PrixMarche;
 import org.polytech.model.legume.type.TypeLegume;
 
 import javax.swing.*;

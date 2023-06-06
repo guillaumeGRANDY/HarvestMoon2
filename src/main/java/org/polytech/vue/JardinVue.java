@@ -4,6 +4,9 @@ import org.polytech.model.JardinModel;
 import org.polytech.model.JoueurModel;
 import org.polytech.model.Ordonnanceur;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
@@ -11,6 +14,7 @@ import java.awt.event.ComponentEvent;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 public class JardinVue extends JFrame {
     private final JardinModel jardinModel;
@@ -47,6 +51,16 @@ public class JardinVue extends JFrame {
         this.setTitle("HarvestMoon2");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+        try {
+            URL resource = getClass().getClassLoader().getResource("minecraft.wav");
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(resource.toURI()));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
         Background background = new Background();
         GridBagLayout windowLayout = new GridBagLayout();
         background.setLayout(windowLayout);
@@ -57,14 +71,14 @@ public class JardinVue extends JFrame {
         constraints.insets = new Insets(10, 10, 10, 10);
 
         //créer le bandeau supérieur
-        TopMenu bandeauSup = new TopMenu();
+        TopMenu topMenu = new TopMenu();
         constraints.weightx = 1.0;
         constraints.weighty = 0.1; // To allocate space in the vertical direction
         constraints.fill = GridBagConstraints.HORIZONTAL; // To make it fill the horizontal space;
         constraints.gridx = 0; // To make sure it starts at the left
         constraints.gridy = 0; // To put it at the top
         constraints.gridwidth = 1; // To make it extend across all columns
-        background.add(bandeauSup, constraints);
+        background.add(topMenu, constraints);
 
         SpeedMenu speedMenu=new SpeedMenu();
         constraints.gridx = 1; // To make sure it starts at the left
@@ -72,16 +86,6 @@ public class JardinVue extends JFrame {
         constraints.weightx = 0.1;
         constraints.weighty = 0.1; // To allocate space in the vertical direction
         background.add(speedMenu, constraints);
-
-        try {
-            Font minecraftFont = Font.createFont(Font.TRUETYPE_FONT, new File("./src/font/Minecraft.otf"));
-            //lblDate.setFont(minecraftFont.deriveFont(Font.PLAIN, 35));
-            //lblMeteo.setFont(minecraftFont.deriveFont(Font.PLAIN, 35));
-        } catch (FontFormatException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
 
         //créer le jardin
         JPanel zoneJardin = new JPanel();
@@ -129,6 +133,7 @@ public class JardinVue extends JFrame {
 
         this.jardinModel.getMeteo().addObserver(menuDown.getBarSoleil());
         this.jardinModel.getMeteo().addObserver(menuDown.getBarPluit());
+        this.jardinModel.getPrix().addObserver(topMenu);
         this.jardinModel.getMeteo().addObserver(background);
         this.jardinModel.getMeteo().addObserver(menuDown);
         this.joueurModel.addObserver(menuDown.getExpBar());
