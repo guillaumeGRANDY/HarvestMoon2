@@ -5,12 +5,7 @@ import org.polytech.utils.ExtensionImage;
 import org.polytech.utils.Utils;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-
-import static java.awt.GridBagConstraints.LINE_START;
 
 public class TopMenuItem extends JPanel {
 
@@ -46,14 +41,8 @@ public class TopMenuItem extends JPanel {
         nb.setFont(new Font("Arial", Font.BOLD, 28));
         nb.setForeground(new java.awt.Color(92, 68, 25));
 
-        try {
-            Font minecraftFont = Font.createFont(Font.TRUETYPE_FONT, new File("./src/font/Minecraft.otf"));
-            nb.setFont(minecraftFont.deriveFont(Font.PLAIN, 28));
-        } catch (FontFormatException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        Font minecraftFont = Utils.getFontFromResources("Minecraft");
+        nb.setFont(minecraftFont.deriveFont(Font.PLAIN, 28));
 
         constraints.gridx=0;
         constraints.gridy=1;

@@ -8,8 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -49,14 +47,8 @@ public class InventoryMenuItem extends JPanel implements Observer, MouseListener
         constraints.insets=new Insets(5,0,5,0);
         this.add(nbTypeLegumeJpanel, constraints);
 
-        try {
-            Font minecraftFont = Font.createFont(Font.TRUETYPE_FONT, new File("./src/font/Minecraft.otf"));
-            nbTypeLegumeJpanel.setFont(minecraftFont.deriveFont(Font.PLAIN, 18));
-        } catch (FontFormatException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        Font minecraftFont = Utils.getFontFromResources("Minecraft");
+        nbTypeLegumeJpanel.setFont(minecraftFont.deriveFont(Font.PLAIN, 18));
         this.addMouseListener(this);
     }
 

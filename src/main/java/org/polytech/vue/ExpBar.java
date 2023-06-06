@@ -6,8 +6,6 @@ import org.polytech.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -27,14 +25,8 @@ public class ExpBar extends JPanel implements Observer {
         lblArgent.setOpaque(false);
         this.add(lblArgent);
 
-        try {
-            Font minecraftFont = Font.createFont(Font.TRUETYPE_FONT, new File("./src/font/Minecraft.otf"));
-            lblArgent.setFont(minecraftFont.deriveFont(Font.PLAIN, 40));
-        } catch (FontFormatException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        Font minecraftFont = Utils.getFontFromResources("Minecraft");
+        lblArgent.setFont(minecraftFont.deriveFont(Font.PLAIN, 40));
     }
 
     @Override
