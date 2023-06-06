@@ -13,9 +13,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-
-import java.io.File;
-import java.net.URL;
+import java.util.Objects;
 
 public class JardinVue extends JFrame {
     private final JardinModel jardinModel;
@@ -53,8 +51,7 @@ public class JardinVue extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         try {
-            URL resource = getClass().getClassLoader().getResource("minecraft.wav");
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(resource.toURI()));
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getClassLoader().getResource("minecraft.wav")));
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.loop(Clip.LOOP_CONTINUOUSLY);

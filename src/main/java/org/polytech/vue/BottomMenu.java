@@ -1,15 +1,13 @@
 package org.polytech.vue;
 
 import org.polytech.model.Meteo;
-import org.polytech.model.PrixMarche;
 import org.polytech.model.legume.type.TypeLegume;
+import org.polytech.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -55,14 +53,8 @@ public class BottomMenu extends JPanel implements MouseListener, Observer {
         this.add(hourLabel,constraints);
 
 
-        try {
-            Font minecraftFont = Font.createFont(Font.TRUETYPE_FONT, new File("./src/font/Minecraft.otf"));
-            hourLabel.setFont(minecraftFont.deriveFont(Font.PLAIN, 40));
-        } catch (FontFormatException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        Font minecraftFont = Utils.getFontFromResources("Minecraft");
+        hourLabel.setFont(minecraftFont.deriveFont(Font.PLAIN, 40));
 
         barPluit=new BarPluit();
         constraints.anchor=LINE_END;

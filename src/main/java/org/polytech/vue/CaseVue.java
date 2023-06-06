@@ -19,8 +19,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.net.URL;
+import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Optional;
@@ -82,8 +81,7 @@ public class CaseVue extends JPanel implements Observer, MouseListener {
     public void mouseClicked(MouseEvent e) {
 
         try {
-            URL resource = getClass().getClassLoader().getResource("plant.wav");
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(resource.toURI()));
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getClassLoader().getResource("plant.wav")));
             Clip audioClip = AudioSystem.getClip();
             audioClip.open(audioInputStream);
             audioClip.start();
