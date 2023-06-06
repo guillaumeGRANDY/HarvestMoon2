@@ -48,7 +48,7 @@ public class JardinVue extends JFrame {
 
     public void initialize() {
         //fenetre
-        this.setSize(800, 600);
+        this.setSize(1500, 1000);
         this.setTitle("HarvestMoon2");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
