@@ -20,6 +20,9 @@ public class TopMenu extends JPanel implements Observer {
         this.setLayout(new GridBagLayout());
         GridBagConstraints constraints=new GridBagConstraints();
 
+        constraints.weightx = 1;
+        constraints.weighty = 0.1; // To allocate space in the vertical direction
+
         int i=0;
         constraints.insets=new Insets(10,5,10,5);
         for (TypeLegume typeLegume : TypeLegume.values()) {
@@ -28,6 +31,15 @@ public class TopMenu extends JPanel implements Observer {
             this.add(articles[i],constraints);
             i++;
         }
+
+        SpeedMenu speedMenu=new SpeedMenu();
+        constraints.gridx = 9; // To make sure it starts at the left
+        constraints.gridy = 0; // To put it at the top
+        constraints.weightx = 0.1;
+        constraints.weighty = 0.1; // To allocate space in the vertical direction
+
+        this.add(speedMenu, constraints);
+
     }
 
     @Override

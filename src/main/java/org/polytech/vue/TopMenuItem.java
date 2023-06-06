@@ -58,7 +58,7 @@ public class TopMenuItem extends JPanel {
         constraints.gridx=0;
         constraints.gridy=1;
         constraints.insets=new Insets(5,10,5,10);
-
+        constraints.fill=GridBagConstraints.CENTER;
         this.add(nb,constraints);
     }
 
