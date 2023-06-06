@@ -13,6 +13,9 @@ public class Inventory extends Observable {
 
     public Inventory() {
         legumesWithQuantity = new HashMap<>();
+        for (TypeLegume typeLegume : TypeLegume.values()) {
+            legumesWithQuantity.put(typeLegume, new LegumeInventoryItem(typeLegume));
+        }
     }
 
     public List<LegumeInventoryItem> inventoryItems() {
@@ -20,9 +23,8 @@ public class Inventory extends Observable {
     }
 
     public void addLegume(LegumeModel legume) {
-        this.legumesWithQuantity.putIfAbsent(legume.getType(), new LegumeInventoryItem(legume));
         LegumeInventoryItem legumeInventoryItemToUpdate = this.legumesWithQuantity.get(legume.getType());
-        legumeInventoryItemToUpdate.incrementNumber();
+        legumeInventoryItemToUpdate.addNewLegume(legume);
         this.setChanged();
         this.notifyObservers(legumeInventoryItemToUpdate);
     }

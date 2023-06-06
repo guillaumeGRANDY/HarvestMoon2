@@ -10,12 +10,17 @@ import org.polytech.model.legume.type.TypeLegume;
 import org.polytech.utils.ExtensionImage;
 import org.polytech.utils.Utils;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Optional;
@@ -34,6 +39,7 @@ public class CaseVue extends JPanel implements Observer, MouseListener {
         setCaseNotPlanted();
         ImageIcon icon = new ImageIcon(image.getScaledInstance(100, 100, Image.SCALE_DEFAULT));
         labelImage.setIcon(icon);
+
         this.addMouseListener(this);
     }
 
@@ -74,6 +80,17 @@ public class CaseVue extends JPanel implements Observer, MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+
+        try {
+            URL resource = getClass().getClassLoader().getResource("plant.wav");
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(resource.toURI()));
+            Clip audioClip = AudioSystem.getClip();
+            audioClip.open(audioInputStream);
+            audioClip.start();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
         if(!this.caseModel.isPlanted()) {
             this.buyAndPlant();
         } else {

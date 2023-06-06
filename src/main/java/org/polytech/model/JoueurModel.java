@@ -1,8 +1,10 @@
 package org.polytech.model;
 
 import org.polytech.model.inventory.Inventory;
+import org.polytech.model.inventory.LegumeInventoryItem;
 import org.polytech.model.legume.LegumeModel;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
 public class JoueurModel extends Observable {
@@ -61,5 +63,16 @@ public class JoueurModel extends Observable {
 
     public void addToInventory(LegumeModel legumeModel) {
         this.inventory.addLegume(legumeModel);
+    }
+
+    public void sell(LegumeInventoryItem legumeInventoryItem) {
+        ArrayList<LegumeModel> legumesToSell = legumeInventoryItem.getLegumesOfTypeLegume();
+        for (LegumeModel legume : legumesToSell) {
+            double price = PrixMarche.getInstance().getPrice(legume.getType());
+            this.solde += price;
+        }
+        legumeInventoryItem.deleteAllLegumes();
+        this.setChanged();
+        this.notifyObservers();
     }
 }
