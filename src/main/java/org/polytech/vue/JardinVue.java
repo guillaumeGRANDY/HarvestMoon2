@@ -15,7 +15,6 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 
 public class JardinVue extends JFrame {
@@ -49,7 +48,7 @@ public class JardinVue extends JFrame {
 
     public void initialize() {
         //fenetre
-        this.setSize(800, 600);
+        this.setSize(1500, 1000);
         this.setTitle("HarvestMoon2");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -79,15 +78,8 @@ public class JardinVue extends JFrame {
         constraints.fill = GridBagConstraints.HORIZONTAL; // To make it fill the horizontal space;
         constraints.gridx = 0; // To make sure it starts at the left
         constraints.gridy = 0; // To put it at the top
-        constraints.gridwidth = 1; // To make it extend across all columns
+        constraints.gridwidth = 2; // To make it extend across all columns
         background.add(topMenu, constraints);
-
-        SpeedMenu speedMenu=new SpeedMenu();
-        constraints.gridx = 1; // To make sure it starts at the left
-        constraints.gridy = 0; // To put it at the top
-        constraints.weightx = 0.1;
-        constraints.weighty = 0.1; // To allocate space in the vertical direction
-        background.add(speedMenu, constraints);
 
         //créer le jardin
         JPanel zoneJardin = new JPanel();

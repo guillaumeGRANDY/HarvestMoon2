@@ -38,12 +38,15 @@ public class InventoryMenuItem extends JPanel implements Observer, MouseListener
         GridBagConstraints constraints=new GridBagConstraints();
         constraints.gridx=0;
         constraints.gridy=0;
+        constraints.insets=new Insets(10,10,0,10);
 
         setImageIconForTypeLegume();
         this.add(labelImageContainingLegumeImage, constraints);
 
         constraints.gridy = 1;
         this.setLabelOfTotalLegumes();
+        nbTypeLegumeJpanel.setForeground(Color.WHITE);
+        constraints.insets=new Insets(5,0,5,0);
         this.add(nbTypeLegumeJpanel, constraints);
 
         try {
