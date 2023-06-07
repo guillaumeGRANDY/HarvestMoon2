@@ -1,4 +1,4 @@
-package org.polytech.vue;
+package org.polytech.vue.bottom;
 
 import org.polytech.model.JoueurModel;
 import org.polytech.utils.ExtensionImage;

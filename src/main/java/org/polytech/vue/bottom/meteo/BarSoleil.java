@@ -1,4 +1,4 @@
-package org.polytech.vue;
+package org.polytech.vue.bottom.meteo;
 
 import org.polytech.model.Meteo;
 import org.polytech.utils.ExtensionImage;

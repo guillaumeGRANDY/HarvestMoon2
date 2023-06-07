@@ -17,7 +17,7 @@ public class JoueurModel extends Observable {
         return solde;
     }
 
-    private Inventory inventory;
+    private final Inventory inventory;
 
     public JoueurModel(double solde) {
         this.solde = solde;
@@ -37,7 +37,6 @@ public class JoueurModel extends Observable {
     /**
      * Achète quelque chose et décrèmente le solde si c'est possible d'acheter
      * @param price le prix de l'objet à acheter
-     * @return true si le joueur a pu acheter le légume
      */
     public void buy(double price) throws Exception {
         if(!this.canBuy(price)) throw new Exception("Le joueur n'a pas assez d'argent pour acheter cette graine !");
@@ -50,15 +49,9 @@ public class JoueurModel extends Observable {
      * Achète un légume et décrèmente le solde si c'est possible d'acheter
      * Ajoute le légume à l'inventaire du joueur
      * @param legume le légume à acheter
-     * @return true si le joueur a pu acheter le légume
      */
     public void buy(LegumeModel legume) throws Exception {
-        System.out.println("buy");
         this.buy(legume.getPrice());
-    }
-
-    private void addLegumeToInventory(LegumeModel legume) {
-        inventory.addLegume(legume);
     }
 
     public void addToInventory(LegumeModel legumeModel) {

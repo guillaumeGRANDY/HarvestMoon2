@@ -49,7 +49,6 @@ public abstract class LegumeModel extends Observable {
         this.stateMachine.currentState().incrementScore(score);
         State oldState = this.stateMachine.currentState();
         this.stateMachine.nextState();
-        System.out.println(this.stateMachine.currentState().stateType());
         if (isPlanted && !this.stateMachine.currentState().equals(oldState)) {
             setChanged();
             notifyObservers();

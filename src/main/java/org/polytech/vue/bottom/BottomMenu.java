@@ -1,8 +1,10 @@
-package org.polytech.vue;
+package org.polytech.vue.bottom;
 
 import org.polytech.model.Meteo;
 import org.polytech.model.legume.type.TypeLegume;
 import org.polytech.utils.Utils;
+import org.polytech.vue.bottom.meteo.BarPluit;
+import org.polytech.vue.bottom.meteo.BarSoleil;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,9 +18,9 @@ import static java.awt.GridBagConstraints.*;
 public class BottomMenu extends JPanel implements MouseListener, Observer {
     private final ExpBar expBar;
 
-    private BottomMenuItem selectedBottomItem;
+    private LegumeMenuItem selectedBottomItem;
 
-    public BottomMenuItem getSelectedBottomItem() {
+    public LegumeMenuItem getSelectedBottomItem() {
         return selectedBottomItem;
     }
 
@@ -79,7 +81,7 @@ public class BottomMenu extends JPanel implements MouseListener, Observer {
         this.add(casePanel,constraints);
 
         for (TypeLegume typeLegume : TypeLegume.values()) {
-            BottomMenuItem legumeButton = new BottomMenuItem(typeLegume);
+            LegumeMenuItem legumeButton = new LegumeMenuItem(typeLegume);
             legumeButton.addMouseListener(this);
             casePanel.add(legumeButton);
 
@@ -105,8 +107,6 @@ public class BottomMenu extends JPanel implements MouseListener, Observer {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("mouse click");
-
         //enleve l'image de fond spécial
         if(selectedBottomItem !=null)
         {
@@ -114,8 +114,8 @@ public class BottomMenu extends JPanel implements MouseListener, Observer {
         }
 
         //ajoute l'image de fond spécial
-        ((BottomMenuItem) e.getSource()).setBackgroundImage("caseSelectionne");
-        selectedBottomItem =((BottomMenuItem) e.getSource());
+        ((LegumeMenuItem) e.getSource()).setBackgroundImage("caseSelectionne");
+        selectedBottomItem =((LegumeMenuItem) e.getSource());
     }
 
     @Override

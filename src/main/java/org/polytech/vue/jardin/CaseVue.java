@@ -1,4 +1,4 @@
-package org.polytech.vue;
+package org.polytech.vue.jardin;
 
 
 import org.polytech.model.CaseModel;
@@ -9,6 +9,7 @@ import org.polytech.model.legume.LegumeModel;
 import org.polytech.model.legume.type.TypeLegume;
 import org.polytech.utils.ExtensionImage;
 import org.polytech.utils.Utils;
+import org.polytech.vue.bottom.LegumeMenuItem;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -104,7 +105,7 @@ public class CaseVue extends JPanel implements Observer, MouseListener {
     }
 
     private void buyAndPlant() {
-        Optional<BottomMenuItem> optionalBottomMenuItem = Optional.ofNullable(parent.getMenuDown().getSelectedBottomItem());
+        Optional<LegumeMenuItem> optionalBottomMenuItem = Optional.ofNullable(parent.getMenuDown().getSelectedBottomItem());
         if(optionalBottomMenuItem.isPresent()) {
             TypeLegume typeLegume = optionalBottomMenuItem.get().getTypeLegume();
             LegumeModel legumeSelected = LegumeFabrique.createLegume(typeLegume);
