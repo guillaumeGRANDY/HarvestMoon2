@@ -2,9 +2,10 @@ package org.polytech.model;
 
 import org.polytech.model.legume.type.TypeLegume;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class PrixPlante {
+public class PrixPlante implements Serializable {
     private TypeLegume typeLegume;
     private int prixBase;
     private int prixCourant;

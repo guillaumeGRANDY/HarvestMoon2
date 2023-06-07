@@ -6,10 +6,11 @@ import org.polytech.model.legume.state.StateMachine;
 import org.polytech.model.legume.state.StateType;
 import org.polytech.model.legume.type.TypeLegume;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Observable;
 
-public abstract class LegumeModel extends Observable {
+public abstract class LegumeModel extends Observable implements Serializable {
     protected StateMachine stateMachine;
 
     private boolean isPlanted;

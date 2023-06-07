@@ -1,8 +1,9 @@
 package org.polytech.model;
 
+import java.io.Serializable;
 import java.util.Observable;
 
-public class JardinModel extends Observable {
+public class JardinModel extends Observable implements Serializable {
     private final CaseModel[][] plants;
     private final int rows;
 

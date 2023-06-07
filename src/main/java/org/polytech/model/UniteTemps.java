@@ -1,6 +1,8 @@
 package org.polytech.model;
 
-public class UniteTemps {
+import java.io.Serializable;
+
+public class UniteTemps implements Serializable {
     /**
      * Ecoulement du temps en millisecondes
      */

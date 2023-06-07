@@ -2,9 +2,10 @@ package org.polytech.model;
 
 import org.polytech.model.legume.type.TypeLegume;
 
+import java.io.Serializable;
 import java.util.Observable;
 
-public class PrixMarche extends Observable implements Runnable {
+public class PrixMarche extends Observable implements Runnable, Serializable {
     PrixPlante[] prixLegume;
 
     private static PrixMarche instance = null;

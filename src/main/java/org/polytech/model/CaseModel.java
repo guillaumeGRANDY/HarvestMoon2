@@ -4,9 +4,10 @@ package org.polytech.model;
 import org.polytech.model.exception.CannotHarvestException;
 import org.polytech.model.legume.LegumeModel;
 
+import java.io.Serializable;
 import java.util.Observable;
 
-public class CaseModel extends Observable implements Runnable {
+public class CaseModel extends Observable implements Runnable, Serializable {
     private LegumeModel legumeModel = null;
 
     private JardinModel parent;

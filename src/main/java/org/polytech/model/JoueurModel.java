@@ -4,10 +4,11 @@ import org.polytech.model.inventory.Inventory;
 import org.polytech.model.inventory.LegumeInventoryItem;
 import org.polytech.model.legume.LegumeModel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observable;
 
-public class JoueurModel extends Observable {
+public class JoueurModel extends Observable implements Serializable {
     /**
      * Argent que le joueur possède
      */
