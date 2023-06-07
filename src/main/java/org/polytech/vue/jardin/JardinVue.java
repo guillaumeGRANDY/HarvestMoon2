@@ -1,10 +1,13 @@
-package org.polytech.vue;
+package org.polytech.vue.jardin;
 
 import org.polytech.model.JardinModel;
 import org.polytech.model.JoueurModel;
 import org.polytech.model.Ordonnanceur;
 import org.polytech.model.PrixMarche;
+import org.polytech.vue.Background;
+import org.polytech.vue.bottom.BottomMenu;
 import org.polytech.vue.inventory.InventoryMenu;
+import org.polytech.vue.top.price.PriceMenu;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -69,7 +72,7 @@ public class JardinVue extends JFrame {
         constraints.insets = new Insets(10, 10, 10, 10);
 
         //créer le bandeau supérieur
-        TopMenu topMenu = new TopMenu();
+        PriceMenu topMenu = new PriceMenu();
         constraints.weightx = 1.0;
         constraints.weighty = 0.1; // To allocate space in the vertical direction
         constraints.fill = GridBagConstraints.HORIZONTAL; // To make it fill the horizontal space;

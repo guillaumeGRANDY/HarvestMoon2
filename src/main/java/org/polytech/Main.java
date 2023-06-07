@@ -1,7 +1,7 @@
 package org.polytech;
 
 import org.polytech.model.JardinModel;
-import org.polytech.vue.JardinVue;
+import org.polytech.vue.jardin.JardinVue;
 
 import javax.swing.*;
 

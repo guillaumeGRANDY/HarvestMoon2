@@ -1,4 +1,4 @@
-package org.polytech.vue;
+package org.polytech.vue.top;
 
 import org.polytech.model.UniteTemps;
 import org.polytech.utils.ExtensionImage;

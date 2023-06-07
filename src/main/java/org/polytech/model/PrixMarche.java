@@ -1,12 +1,8 @@
 package org.polytech.model;
 
 import org.polytech.model.legume.type.TypeLegume;
-import org.polytech.vue.BottomMenuItem;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Observable;
-import java.util.Random;
 
 public class PrixMarche extends Observable implements Runnable {
     PrixPlante[] prixLegume;

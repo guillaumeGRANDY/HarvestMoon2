@@ -1,22 +1,23 @@
-package org.polytech.vue;
+package org.polytech.vue.top.price;
 
 import org.polytech.model.PrixMarche;
 import org.polytech.model.legume.type.TypeLegume;
+import org.polytech.vue.top.SpeedMenu;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
-public class TopMenu extends JPanel implements Observer {
+public class PriceMenu extends JPanel implements Observer {
 
-    TopMenuItem articles[];
+    PriceMenuItem articles[];
 
-    public TopMenu() {
+    public PriceMenu() {
 
         this.setBackground(new java.awt.Color(0, 0, 0,0.5F));
 
-        articles=new TopMenuItem[8];
+        articles=new PriceMenuItem[8];
         this.setLayout(new GridBagLayout());
         GridBagConstraints constraints=new GridBagConstraints();
 
@@ -27,7 +28,7 @@ public class TopMenu extends JPanel implements Observer {
         constraints.insets=new Insets(10,5,10,5);
         for (TypeLegume typeLegume : TypeLegume.values()) {
             constraints.gridx=i;
-            articles[i] = new TopMenuItem(typeLegume);
+            articles[i] = new PriceMenuItem(typeLegume);
             this.add(articles[i],constraints);
             i++;
         }
