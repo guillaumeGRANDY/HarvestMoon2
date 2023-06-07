@@ -42,16 +42,19 @@ public abstract class LegumeModel extends Observable {
      * @param score le score de croissance à ajouter au légume
      */
     public void croissance(long score) {
-        if(this.stateMachine.currentState().stateType().equals(StateType.GRAINE)) {
-            setChanged();
-            notifyObservers();
-        }
-        this.stateMachine.currentState().incrementScore(score);
-        State oldState = this.stateMachine.currentState();
-        this.stateMachine.nextState();
-        if (isPlanted && !this.stateMachine.currentState().equals(oldState)) {
-            setChanged();
-            notifyObservers();
+        if(this.stateMachine.currentState() != null) {
+            if(this.stateMachine.currentState().stateType().equals(StateType.GRAINE)) {
+                setChanged();
+                notifyObservers();
+            }
+            this.stateMachine.currentState().incrementScore(score);
+            State oldState = this.stateMachine.currentState();
+            this.stateMachine.nextState();
+            if(this.stateMachine.currentState() == null) return;
+            if (isPlanted && !this.stateMachine.currentState().equals(oldState)) {
+                setChanged();
+                notifyObservers();
+            }
         }
     }
 

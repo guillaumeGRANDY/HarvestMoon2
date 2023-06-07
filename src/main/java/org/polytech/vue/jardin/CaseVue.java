@@ -154,6 +154,7 @@ public class CaseVue extends JPanel implements Observer, MouseListener {
                 case BOURGON -> changeImage("stage2");
                 case FLEURIE -> changeImage("stage3");
                 case MATURE -> changeImage("stage4" + legumeModel.getType().getImageName());
+                case POURRIE -> System.out.println("pouuuuurie");
             }
             this.repaint();
         }
