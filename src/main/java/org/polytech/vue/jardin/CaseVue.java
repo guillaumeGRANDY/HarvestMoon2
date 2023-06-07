@@ -6,6 +6,7 @@ import org.polytech.model.Ordonnanceur;
 import org.polytech.model.exception.CannotHarvestException;
 import org.polytech.model.legume.LegumeFabrique;
 import org.polytech.model.legume.LegumeModel;
+import org.polytech.model.legume.state.StateType;
 import org.polytech.model.legume.type.TypeLegume;
 import org.polytech.utils.ExtensionImage;
 import org.polytech.utils.Utils;

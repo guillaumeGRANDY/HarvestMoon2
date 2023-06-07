@@ -57,7 +57,7 @@ public class JoueurModel extends Observable implements Serializable {
     }
 
     public void addToInventory(LegumeModel legumeModel) {
-        if(legumeModel.getCurrentState().stateType()!= StateType.POURRIE) {
+        if(legumeModel!=null) {
             this.inventory.addLegume(legumeModel);
         }
     }
