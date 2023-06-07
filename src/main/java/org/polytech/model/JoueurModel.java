@@ -51,7 +51,6 @@ public class JoueurModel extends Observable {
      * @param legume le légume à acheter
      */
     public void buy(LegumeModel legume) throws Exception {
-        System.out.println("buy");
         this.buy(legume.getPrice());
     }
 

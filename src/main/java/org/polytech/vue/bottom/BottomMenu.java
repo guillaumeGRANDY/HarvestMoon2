@@ -107,8 +107,6 @@ public class BottomMenu extends JPanel implements MouseListener, Observer {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("mouse click");
-
         //enleve l'image de fond spécial
         if(selectedBottomItem !=null)
         {
