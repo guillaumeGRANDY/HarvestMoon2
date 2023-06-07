@@ -52,6 +52,10 @@ public class CaseModel extends Observable implements Runnable, Serializable {
         }
     }
 
+    public LegumeModel getLegumeModel() {
+        return legumeModel;
+    }
+
     /**
      * Essaie de récolter le légume sur la case
      * @return le légume à récolter

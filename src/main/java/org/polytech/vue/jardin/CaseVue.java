@@ -99,7 +99,7 @@ public class CaseVue extends JPanel implements Observer, MouseListener {
                 this.setCaseNotPlanted();
                 this.resizeImage();
             } catch (CannotHarvestException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage());
+                this.caseModel.getLegumeModel().croissance(10);
             }
         }
     }
