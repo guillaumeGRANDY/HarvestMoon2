@@ -3,6 +3,7 @@ package org.polytech.model;
 import org.polytech.model.inventory.Inventory;
 import org.polytech.model.inventory.LegumeInventoryItem;
 import org.polytech.model.legume.LegumeModel;
+import org.polytech.model.legume.state.StateType;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -56,7 +57,9 @@ public class JoueurModel extends Observable implements Serializable {
     }
 
     public void addToInventory(LegumeModel legumeModel) {
-        this.inventory.addLegume(legumeModel);
+        if(legumeModel.getCurrentState().stateType()!= StateType.POURRIE) {
+            this.inventory.addLegume(legumeModel);
+        }
     }
 
     public void sell(LegumeInventoryItem legumeInventoryItem) {

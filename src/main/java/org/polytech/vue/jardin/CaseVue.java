@@ -28,7 +28,6 @@ import java.util.Optional;
 public class CaseVue extends JPanel implements Observer, MouseListener {
     private Image image ;
     private JLabel labelImage=new JLabel();
-    private JLabel labelParticule=
     private CaseModel caseModel;
 
     private JardinVue parent;
@@ -155,7 +154,7 @@ public class CaseVue extends JPanel implements Observer, MouseListener {
                 case BOURGON -> changeImage("stage2");
                 case FLEURIE -> changeImage("stage3");
                 case MATURE -> changeImage("stage4" + legumeModel.getType().getImageName());
-                case POURRIE -> System.out.println("pouuuuurie");
+                case POURRIE -> changeImage("mort");
             }
             this.repaint();
         }

@@ -3,6 +3,7 @@ package org.polytech.model;
 
 import org.polytech.model.exception.CannotHarvestException;
 import org.polytech.model.legume.LegumeModel;
+import org.polytech.model.legume.state.StateType;
 
 import java.io.Serializable;
 import java.util.Observable;
@@ -63,7 +64,7 @@ public class CaseModel extends Observable implements Runnable, Serializable {
      */
     public LegumeModel tryHarvest() throws CannotHarvestException {
         LegumeModel legumeToHarvest = this.legumeModel;
-        if(!this.legumeModel.tryHarvest()) {
+        if(this.legumeModel.getCurrentState().stateType()== StateType.POURRIE || !this.legumeModel.tryHarvest()) {
             throw new CannotHarvestException(this.legumeModel);
         }
         this.legumeModel = null;
