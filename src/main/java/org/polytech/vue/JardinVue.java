@@ -84,8 +84,8 @@ public class JardinVue extends JFrame {
         GridLayout jardinLayout = new GridLayout(5, 8, 10, 10);
         zoneJardin.setLayout(jardinLayout);
 
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 8; j++) {
+        for (int i = 0; i < jardinModel.getRows(); i++) {
+            for (int j = 0; j < jardinModel.getCols(); j++) {
                 CaseVue uneCase = new CaseVue(jardinModel.getCase(i, j),this);
                 uneCase.setBackground(new java.awt.Color(0, 0, 0, 0));
                 zoneJardin.add(uneCase); // add à la grid
