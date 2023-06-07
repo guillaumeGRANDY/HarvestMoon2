@@ -3,11 +3,13 @@ package org.polytech.model;
 import org.polytech.model.inventory.Inventory;
 import org.polytech.model.inventory.LegumeInventoryItem;
 import org.polytech.model.legume.LegumeModel;
+import org.polytech.model.legume.state.StateType;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observable;
 
-public class JoueurModel extends Observable {
+public class JoueurModel extends Observable implements Serializable {
     /**
      * Argent que le joueur possède
      */
@@ -55,7 +57,9 @@ public class JoueurModel extends Observable {
     }
 
     public void addToInventory(LegumeModel legumeModel) {
-        this.inventory.addLegume(legumeModel);
+        if(legumeModel!=null) {
+            this.inventory.addLegume(legumeModel);
+        }
     }
 
     public void sell(LegumeInventoryItem legumeInventoryItem) {

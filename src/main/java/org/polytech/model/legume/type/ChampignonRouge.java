@@ -53,12 +53,27 @@ public class ChampignonRouge extends LegumeModel {
                 return new State(250) {
                     @Override
                     public State nextState() {
-                        return mature();
+                        return pourrie();
                     }
 
                     @Override
                     public StateType stateType() {
                         return StateType.MATURE;
+                    }
+                };
+            }
+
+            @Override
+            public State pourrie() {
+                return new State(100) {
+                    @Override
+                    public State nextState() {
+                        return pourrie();
+                    }
+
+                    @Override
+                    public StateType stateType() {
+                        return StateType.POURRIE;
                     }
                 };
             }

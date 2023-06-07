@@ -22,6 +22,10 @@ public class JardinVue extends JFrame {
     private final JardinModel jardinModel;
     private final JoueurModel joueurModel;
 
+    private Background background;
+
+    private PriceMenu topMenu;
+
     public JoueurModel getJoueurModel() {
         return joueurModel;
     }
@@ -62,7 +66,7 @@ public class JardinVue extends JFrame {
             ex.printStackTrace();
         }
 
-        Background background = new Background();
+        background = new Background();
         GridBagLayout windowLayout = new GridBagLayout();
         background.setLayout(windowLayout);
         this.add(background);
@@ -72,7 +76,7 @@ public class JardinVue extends JFrame {
         constraints.insets = new Insets(10, 10, 10, 10);
 
         //créer le bandeau supérieur
-        PriceMenu topMenu = new PriceMenu();
+        topMenu = new PriceMenu();
         constraints.weightx = 1.0;
         constraints.weighty = 0.1; // To allocate space in the vertical direction
         constraints.fill = GridBagConstraints.HORIZONTAL; // To make it fill the horizontal space;
@@ -125,16 +129,21 @@ public class JardinVue extends JFrame {
         constraints.fill = GridBagConstraints.CENTER;
         background.add(menuDown, constraints);
 
+        addAllObservers();
+        initArgentLabel();
+
+        this.setVisible(true);
+        Ordonnanceur.getInstance().start();
+    }
+
+    public void addAllObservers()
+    {
         this.jardinModel.getMeteo().addObserver(menuDown.getBarSoleil());
         this.jardinModel.getMeteo().addObserver(menuDown.getBarPluit());
         PrixMarche.getInstance().addObserver(topMenu);
         this.jardinModel.getMeteo().addObserver(background);
         this.jardinModel.getMeteo().addObserver(menuDown);
         this.joueurModel.addObserver(menuDown.getExpBar());
-        initArgentLabel();
-
-        this.setVisible(true);
-        Ordonnanceur.getInstance().start();
     }
 
     private void initArgentLabel() {

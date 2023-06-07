@@ -3,12 +3,13 @@ package org.polytech.model.inventory;
 import org.polytech.model.legume.LegumeModel;
 import org.polytech.model.legume.type.TypeLegume;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
 
-public class Inventory extends Observable {
+public class Inventory extends Observable implements Serializable {
     private final HashMap<TypeLegume, LegumeInventoryItem> legumesWithQuantity;
 
     public Inventory() {

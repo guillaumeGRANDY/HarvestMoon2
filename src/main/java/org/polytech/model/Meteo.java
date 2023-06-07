@@ -1,9 +1,10 @@
 package org.polytech.model;
 
+import java.io.Serializable;
 import java.util.Random;
 import java.util.Observable;
 
-public class Meteo extends Observable implements Runnable{
+public class Meteo extends Observable implements Runnable, Serializable {
 
     int pluit=5,soleil=10;
 

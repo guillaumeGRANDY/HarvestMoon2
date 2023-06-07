@@ -6,6 +6,7 @@ import org.polytech.model.Ordonnanceur;
 import org.polytech.model.exception.CannotHarvestException;
 import org.polytech.model.legume.LegumeFabrique;
 import org.polytech.model.legume.LegumeModel;
+import org.polytech.model.legume.state.StateType;
 import org.polytech.model.legume.type.TypeLegume;
 import org.polytech.utils.ExtensionImage;
 import org.polytech.utils.Utils;
@@ -99,7 +100,7 @@ public class CaseVue extends JPanel implements Observer, MouseListener {
                 this.setCaseNotPlanted();
                 this.resizeImage();
             } catch (CannotHarvestException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage());
+                this.caseModel.getLegumeModel().croissance(10);
             }
         }
     }
@@ -154,8 +155,15 @@ public class CaseVue extends JPanel implements Observer, MouseListener {
                 case BOURGON -> changeImage("stage2");
                 case FLEURIE -> changeImage("stage3");
                 case MATURE -> changeImage("stage4" + legumeModel.getType().getImageName());
+                case POURRIE -> changeImage("mort");
             }
             this.repaint();
         }
+    }
+
+    public void addParticles()
+    {
+        Timer timer = new Timer(1000, e -> {
+        });
     }
 }

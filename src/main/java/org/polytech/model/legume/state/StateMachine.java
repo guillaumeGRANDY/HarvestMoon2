@@ -25,4 +25,5 @@ public abstract class StateMachine {
     public abstract State bourgon();
     public abstract State fleurie();
     public abstract State mature();
+    public abstract State pourrie();
 }

@@ -6,10 +6,11 @@ import org.polytech.model.legume.state.StateMachine;
 import org.polytech.model.legume.state.StateType;
 import org.polytech.model.legume.type.TypeLegume;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Observable;
 
-public abstract class LegumeModel extends Observable {
+public abstract class LegumeModel extends Observable implements Serializable {
     protected StateMachine stateMachine;
 
     private boolean isPlanted;
@@ -42,16 +43,19 @@ public abstract class LegumeModel extends Observable {
      * @param score le score de croissance à ajouter au légume
      */
     public void croissance(long score) {
-        if(this.stateMachine.currentState().stateType().equals(StateType.GRAINE)) {
-            setChanged();
-            notifyObservers();
-        }
-        this.stateMachine.currentState().incrementScore(score);
-        State oldState = this.stateMachine.currentState();
-        this.stateMachine.nextState();
-        if (isPlanted && !this.stateMachine.currentState().equals(oldState)) {
-            setChanged();
-            notifyObservers();
+        if(this.stateMachine.currentState() != null) {
+            if(this.stateMachine.currentState().stateType().equals(StateType.GRAINE)) {
+                setChanged();
+                notifyObservers();
+            }
+            this.stateMachine.currentState().incrementScore(score);
+            State oldState = this.stateMachine.currentState();
+            this.stateMachine.nextState();
+            if(this.stateMachine.currentState() == null) return;
+            if (isPlanted && !this.stateMachine.currentState().equals(oldState)) {
+                setChanged();
+                notifyObservers();
+            }
         }
     }
 

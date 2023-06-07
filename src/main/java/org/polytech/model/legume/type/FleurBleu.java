@@ -53,7 +53,7 @@ public class FleurBleu extends LegumeModel {
                 return new State(250) {
                     @Override
                     public State nextState() {
-                        return mature();
+                        return pourrie();
                     }
 
                     @Override
@@ -62,6 +62,23 @@ public class FleurBleu extends LegumeModel {
                     }
                 };
             }
+
+            @Override
+            public State pourrie() {
+                return new State(120) {
+                    @Override
+                    public State nextState() {
+                        return pourrie();
+                    }
+
+                    @Override
+                    public StateType stateType() {
+                        return StateType.POURRIE;
+                    }
+                };
+            }
+
+
         };
     }
 

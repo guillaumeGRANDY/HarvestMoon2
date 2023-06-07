@@ -38,8 +38,10 @@ public class Ordonnanceur {
      */
     private void actualize() throws InterruptedException {
         while (true) {
-            for (Runnable runnable : runnables) {
-                runnable.run();
+            if(UniteTemps.CONTINUE) {
+                for (Runnable runnable : runnables) {
+                    runnable.run();
+                }
             }
             Thread.sleep(UniteTemps.ECHELLE_TEMPS);
         }

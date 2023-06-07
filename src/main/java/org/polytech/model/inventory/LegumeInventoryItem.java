@@ -3,11 +3,12 @@ package org.polytech.model.inventory;
 import org.polytech.model.legume.LegumeModel;
 import org.polytech.model.legume.type.TypeLegume;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Observable;
 
-public class LegumeInventoryItem extends Observable {
+public class LegumeInventoryItem extends Observable implements Serializable {
     private TypeLegume typeLegume;
     private ArrayList<LegumeModel> legumesOfTypeLegume;
 
