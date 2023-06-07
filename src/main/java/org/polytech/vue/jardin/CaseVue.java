@@ -28,6 +28,7 @@ import java.util.Optional;
 public class CaseVue extends JPanel implements Observer, MouseListener {
     private Image image ;
     private JLabel labelImage=new JLabel();
+    private JLabel labelParticule=
     private CaseModel caseModel;
 
     private JardinVue parent;
@@ -158,5 +159,11 @@ public class CaseVue extends JPanel implements Observer, MouseListener {
             }
             this.repaint();
         }
+    }
+
+    public void addParticles()
+    {
+        Timer timer = new Timer(1000, e -> {
+        });
     }
 }
