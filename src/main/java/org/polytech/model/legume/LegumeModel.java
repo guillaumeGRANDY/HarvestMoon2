@@ -1,9 +1,10 @@
 package org.polytech.model.legume;
 
 
-import org.polytech.model.legume.state.State;
 import org.polytech.model.legume.state.StateMachine;
+import org.polytech.model.legume.state.type.State;
 import org.polytech.model.legume.state.StateType;
+import org.polytech.model.legume.state.type.StateGraine;
 import org.polytech.model.legume.type.TypeLegume;
 
 import java.io.Serializable;
