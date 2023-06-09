@@ -29,15 +29,16 @@ public class JardinModel extends Observable implements Serializable {
         plants = new CaseModel[rows][cols];
         this.rows = rows;
         this.cols = cols;
+        changePlants();
+    }
+    
+    public void initGame() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 plants[i][j] = new CaseModel(this);
+                Ordonnanceur.getInstance().addRunnable(plants[i][j]);
             }
         }
-        changePlants();
-    }
-
-    public void initGame() {
         setChanged();
         notifyObservers(this.plants);
     }
