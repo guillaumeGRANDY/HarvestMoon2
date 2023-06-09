@@ -1,10 +1,18 @@
-package org.polytech.model.legume.state;
+package org.polytech.model.legume.state.type;
 
-public abstract class State {
+import org.polytech.model.legume.state.StateType;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
+public abstract class State implements Serializable {
     /**
      * Seuil de croissance à atteindre
      */
     private long seuilCroissance;
+
+    protected Map<StateType, Long> croissances;
 
     public double getSeuilCroissance() {
         return seuilCroissance;
@@ -18,8 +26,20 @@ public abstract class State {
 
     /**
      * Constructeur de l'état
-     * @param seuilCroissance score de croissance avant de transiter vers l'état suivant
      */
+    public State(HashMap<StateType, Long> seuilCroissances) {
+        this.croissances = seuilCroissances;
+    }
+
+    public State(Map<StateType, Long> seuilCroissances, long seuilCroissance) {
+        croissances = seuilCroissances;
+        this.seuilCroissance = seuilCroissance;
+    }
+
+    public State(Map<StateType, Long> seuilCroissances) {
+        this.croissances = seuilCroissances;
+    }
+
     public State(long seuilCroissance) {
         this.seuilCroissance = seuilCroissance;
     }

@@ -1,10 +1,14 @@
 package org.polytech.model.legume.state;
 
-public abstract class StateMachine {
+import org.polytech.model.legume.state.type.State;
+
+import java.io.Serializable;
+
+public class StateMachine implements Serializable {
     private State currentState;
 
-    public StateMachine() {
-        this.currentState = graine();
+    public StateMachine(State initialState) {
+        this.currentState = initialState;
     }
 
     public void setCurrentState(State currentState) {
@@ -20,10 +24,4 @@ public abstract class StateMachine {
             setCurrentState(currentState.nextState());
         }
     }
-
-    public abstract State graine();
-    public abstract State bourgon();
-    public abstract State fleurie();
-    public abstract State mature();
-    public abstract State pourrie();
 }

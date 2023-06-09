@@ -1,83 +1,18 @@
 package org.polytech.model.legume.type;
 
 import org.polytech.model.legume.LegumeModel;
-import org.polytech.model.legume.state.State;
+import org.polytech.model.legume.state.type.State;
 import org.polytech.model.legume.state.StateMachine;
 import org.polytech.model.legume.state.StateType;
+import org.polytech.model.legume.state.type.StateGraine;
+
+import java.util.Map;
 
 public class FleurJaune extends LegumeModel {
     public FleurJaune() {
         super();
-        this.stateMachine = new StateMachine() {
-            public State graine() {
-                return new State(250) {
-                    public State nextState() {
-                        return bourgon();
-                    }
-
-                    public StateType stateType() {
-                        return StateType.GRAINE;
-                    }
-                };
-            }
-
-            public State bourgon() {
-                return new State(250) {
-                    @Override
-                    public State nextState() {
-                        return fleurie();
-                    }
-
-                    @Override
-                    public StateType stateType() {
-                        return StateType.BOURGON;
-                    }
-                };
-            }
-
-            public State fleurie() {
-                return new State(250) {
-                    @Override
-                    public State nextState() {
-                        return mature();
-                    }
-
-                    @Override
-                    public StateType stateType() {
-                        return StateType.FLEURIE;
-                    }
-                };
-            }
-
-            public State mature() {
-                return new State(250) {
-                    @Override
-                    public State nextState() {
-                        return pourrie();
-                    }
-
-                    @Override
-                    public StateType stateType() {
-                        return StateType.MATURE;
-                    }
-                };
-            }
-
-            @Override
-            public State pourrie() {
-                return new State(300) {
-                    @Override
-                    public State nextState() {
-                        return pourrie();
-                    }
-
-                    @Override
-                    public StateType stateType() {
-                        return StateType.POURRIE;
-                    }
-                };
-            }
-        };
+        State initialState = new StateGraine(Map.of(StateType.GRAINE, 120L, StateType.BOURGON, 130L, StateType.FLEURIE, 120L, StateType.MATURE, 130L));
+        this.stateMachine = new StateMachine(initialState);
     }
 
     @Override
