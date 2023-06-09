@@ -61,6 +61,8 @@ public class CaseVue extends JPanel implements Observer, MouseListener {
                 resizeImage();
             }
         });
+
+        updateImageOfLegume(caseModel.getLegumeModel());
         Ordonnanceur.getInstance().addRunnable(caseModel);
     }
 
@@ -150,15 +152,23 @@ public class CaseVue extends JPanel implements Observer, MouseListener {
     @Override
     public void update(Observable o, Object arg) {
         if(o instanceof LegumeModel legumeModel) {
-            switch (legumeModel.getCurrentState().stateType()) {
-                case GRAINE -> changeImage("stage1");
-                case BOURGON -> changeImage("stage2");
-                case FLEURIE -> changeImage("stage3");
-                case MATURE -> changeImage("stage4" + legumeModel.getType().getImageName());
-                case POURRIE -> changeImage("mort");
-            }
-            this.repaint();
+            updateImageOfLegume(legumeModel);
         }
+    }
+
+    private void updateImageOfLegume(LegumeModel legumeModel) {
+        if(legumeModel == null) return;
+        switch (legumeModel.getCurrentState().stateType()) {
+            case GRAINE -> image = Utils.getImageIconFromResources("stage1", ExtensionImage.PNG).getImage();
+            case BOURGON -> image = Utils.getImageIconFromResources("stage2", ExtensionImage.PNG).getImage();
+            case FLEURIE -> image = Utils.getImageIconFromResources("stage3", ExtensionImage.PNG).getImage();
+            case MATURE -> image = Utils.getImageIconFromResources("stage4" + legumeModel.getType().getImageName(), ExtensionImage.PNG).getImage();
+            case POURRIE -> image = Utils.getImageIconFromResources("mort", ExtensionImage.PNG).getImage();
+        }
+        int dimension= Math.max(Math.min(getWidth(),getHeight()), 70);
+        labelImage.setIcon(new ImageIcon(image.getScaledInstance(dimension, dimension, Image.SCALE_DEFAULT)));
+        parent.repaint();
+        this.repaint();
     }
 
     public void addParticles()

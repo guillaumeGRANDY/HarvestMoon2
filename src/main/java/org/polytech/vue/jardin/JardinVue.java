@@ -4,6 +4,8 @@ import org.polytech.model.JardinModel;
 import org.polytech.model.JoueurModel;
 import org.polytech.model.Ordonnanceur;
 import org.polytech.model.PrixMarche;
+import org.polytech.serialization.GameData;
+import org.polytech.serialization.SerializationUtils;
 import org.polytech.vue.Background;
 import org.polytech.vue.bottom.BottomMenu;
 import org.polytech.vue.inventory.InventoryMenu;
@@ -16,15 +18,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Objects;
 
 public class JardinVue extends JFrame {
-    private final JardinModel jardinModel;
-    private final JoueurModel joueurModel;
+    private JardinModel jardinModel;
+    private JoueurModel joueurModel;
 
     private Background background;
 
     private PriceMenu topMenu;
+
+    private JPanel zoneJardin;
 
     public JoueurModel getJoueurModel() {
         return joueurModel;
@@ -85,19 +91,37 @@ public class JardinVue extends JFrame {
         constraints.gridwidth = 2; // To make it extend across all columns
         background.add(topMenu, constraints);
 
+        try {
+            GameData gameData = (GameData) SerializationUtils.load();
+            this.jardinModel = gameData.getJardinModel();
+            this.joueurModel = gameData.getJoueurModel();
+            for (int i = 0; i < jardinModel.getRows(); i++) {
+                for (int j = 0; j < jardinModel.getCols(); j++) {
+                    Ordonnanceur.getInstance().addRunnable(this.jardinModel.getCase(i,j));
+                }
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+
+        this.addWindowListener(new WindowAdapter(){
+            public void windowClosing(WindowEvent event){
+                try {
+                    SerializationUtils.save(new GameData(jardinModel, joueurModel));
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
+            }
+        });
+
+
         //créer le jardin
-        JPanel zoneJardin = new JPanel();
+        zoneJardin = new JPanel();
         zoneJardin.setBackground(new java.awt.Color(0, 0, 0, 0));
         GridLayout jardinLayout = new GridLayout(5, 8, 10, 10);
         zoneJardin.setLayout(jardinLayout);
 
-        for (int i = 0; i < jardinModel.getRows(); i++) {
-            for (int j = 0; j < jardinModel.getCols(); j++) {
-                CaseVue uneCase = new CaseVue(jardinModel.getCase(i, j),this);
-                uneCase.setBackground(new java.awt.Color(0, 0, 0, 0));
-                zoneJardin.add(uneCase); // add à la grid
-            }
-        }
+        initZoneJardin();
 
         constraints.gridx = 0;
         constraints.gridy = 1;
@@ -134,6 +158,17 @@ public class JardinVue extends JFrame {
 
         this.setVisible(true);
         Ordonnanceur.getInstance().start();
+    }
+
+    private void initZoneJardin() {
+        this.zoneJardin.removeAll();
+        for (int i = 0; i < jardinModel.getRows(); i++) {
+            for (int j = 0; j < jardinModel.getCols(); j++) {
+                CaseVue uneCase = new CaseVue(jardinModel.getCase(i, j),this);
+                uneCase.setBackground(new Color(0, 0, 0, 0));
+                zoneJardin.add(uneCase); // add à la grid
+            }
+        }
     }
 
     public void addAllObservers()

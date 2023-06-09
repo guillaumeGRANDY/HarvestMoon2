@@ -3,7 +3,6 @@ package org.polytech.model;
 import org.polytech.model.inventory.Inventory;
 import org.polytech.model.inventory.LegumeInventoryItem;
 import org.polytech.model.legume.LegumeModel;
-import org.polytech.model.legume.state.StateType;
 
 import java.io.Serializable;
 import java.util.ArrayList;
